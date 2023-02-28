@@ -1,0 +1,1781 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Ultimate Video Player documentation.</title>
+	<script type="text/javascript" src="scripts/shCore.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="scripts/shBrushXml.js"></script>
+	
+	<link type="text/css" rel="stylesheet" href="styles/shCoreDefault.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/fwd.css" type="text/css" >
+	<style type="text/css" media="screen">
+		p, table, hr, .box { margin-bottom:25px; }
+		.box p { margin-bottom:10px; }
+	</style>
+</head>
+
+<body>
+	<div class="container">
+	
+		<h3 class="center alt">&ldquo;Ultimate Video Player &rdquo; Documentation by FWDesign</h3>
+		
+		<hr>
+		
+		<h1 class="center">&ldquo;<span class="center alt">Ultimate Video Player</span>&rdquo;</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Version: 8.3<br>
+					By:© FWD (FUTURE WEB DESIGN)<br>
+					Email: <a href="mailto:tibi_diablo@yahoo.com">tibi_diablo@yahoo.com</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing our script. If you have any questions that are beyond the scope of this help file, please feel free to email via our email. Thanks so much!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+			<li><a href="#important">Important notes read this before anything else.</a></li>
+			<li><a href="#instalation">Embed Ultimate Video Player into your html page.</a></li>
+			<li><a href="#fullscreen">Install Ultimate Video Player in fullscreen and popup.</a></li>
+			<li><a href="#config">Constructor parameters.</a></li>
+			<li><a href="#cat">Setup playlists.</a></li>
+			<li><a href="#source">Setup video, ads (pre-roll / mid-roll / post-roll), subtitles, hls, 360 video and poster source.</a></li>
+			<li><a href="#share">Setup pop-up image ads and google adsense pop-up ads.</a></li>
+			<li><a href="#cue">Setup cuepoints.</a></li>
+			<li><a href="#api">API.</a></li>
+			<li><a href="#annotations">Setup annotations.</a></li>
+			<li><a href="#private">Setup private videos.</a></li>
+			<li><a href="#encrypt">Encrypt video / subtitle path.</a></li>
+			<li><a href="#google">Google Drive, Dropbox, Amazon S3.</a></li>	
+			<li><a href="#start">Start / stop video at a specified time.</a></li>	
+			<li><a href="#popw">Advertisement on pause window.</a></li>	
+			<li><a href="#vast">VAST / VMAP / Google Doubleclick IMA (video adsense).</a></li>	
+			<li><a href="#analytics">Setup google analytics.</a></li>
+			<li><a href="#redirect">Redirect / open page when the video has finished to play.</a></li>
+			<li><a href="#timestamps">Starting / stopping the video at a specified time using timestamps.</a></li>
+			<li><a href="#atob">A to B loop.</a></li>
+			<li><a href="#thumbnails_preview">Thumbnails preview.</a></li>
+			<li><a href="#chromecast">Chromecast.</a></li>
+			<li><a href="#hex">Hex colors.</a></li>
+			<li><a href="#finger">Fingerprint stamp.</a></li>
+			<li><a href="#credits">Sources and Credits</a></li>
+		</ol>
+	
+		<hr>
+		
+		<h3 id="important"><strong>A) Important notes make sure you read this!</strong> - <a href="#toc">top</a></h3>
+		<p>Please note that the Ultimate Video Player installation and configuration is not complicated but because it has a lot of customizable settings it might seem complicated, please go through the entire documentation before trying to install it into your own page. Basically what it must be done is to copy some html and js code from the examples I provided and paste it into your own html page and of course add your own video file.</p>
+		<p>Ultimate Video Player only requires the mp4 video format and it  will work in all browsers on a desktop machine or on a mobile device, this is extremely important because there is no need to create multiple video formats for browsers that dose not support mp4, also please note that the mp4 video format is recommended and used by all major browsers distributors like Google, Microsoft, Apple, Mozzila etc.!</p>
+		<p>Vimeo videos are disabeld by default because they are not working local, the Vimeo API dosen't work local so it has to be disable in order to setup the player and test local, to enable it set <span class="boldLi">useVimeo:"yes"</span>
+		<p>Safari under WIndows, or Firefox under MAC the flash player is used because this browsers doesn't support mp4 videos,  if your videos doesn't start until they are fully loaded then they are encoded with the metadata at the end, this can be easily fixed by using <a href="http://renaun.com/blog/code/qtindexswapper/" target="_blank">this tool</a>. This might change in future versions of this browsers as they improve.</p>
+		<p>The server is character case sensitive so make sure that the Ultimate Video Player settings are identical to those from the provided examples.</p>
+		<p style="color:#FF0000;">When using mp4 video files located on your server with relative paths you must add all folders that contains mp4's videos in the content folder, this is extremely important in order for all features to work correctly.</p>
+		<p>Some of the  features will not work local like the share button or playing youtube videos on some browsers like IE and Opera, this is normal behavior because most browser does not allow this, once uploaded on the server it will function properly.</p>
+		<p>When something is wrong with a Ultimate Video Player action a red info box with the problem description will appear over the Ultimate Video Player, please note that this box is there to help you understand the problem, for example if a mp4 video file is not found the box will appear and inform you about the problem. The box can be closed when clicked or touched.</p>
+		<p>The Ultimate Video Player skin is constructed from .png images, only  a few settings for changing colors are possible like changing the time color, thumbnails text color etc. If you want a different skin the .png files must be modified. We have a great designer in our team so if you need a custom skin please contact us!</p>
+		
+		<h3 id="instalation"><strong>B) Embed Ultimate Video Player into your html page.</strong> - <a href="#toc">top</a></h3>
+		<p>This is a small tutorial about how to embed the UVP into your page. R can be e embedded into a html page inside a div of your choosing, it will adapt it's width and height based on the <span class="boldLi">maxWidth</span> and <span class="boldLi">maxHeight</span> properties specified in the constructor, if the page is resized and the prt div width is smaller then the <span class="boldLi">maxWidth</span> property the UVP will adapt its size accordingly.</p>
+		<p>In the download files there is a start folder and in this folder there are html files starting with the label "responsive", each of this examples have exactly the same structure with different constructor settings. You can use one of them to copy and paste the required html code based on skin that you need, I will use the <span class="boldLi">responsive-skin-minimal-dark.html</span> as an example for this tutorial.</p>
+		<p>The skin is created using javascript and .png images, if you want a custom skin please contact us. If you want to create a skin of your own modify the ones we already provided.</p>
+		
+		<ul>
+			<li>Copy and paste the content folder and the java folder into the same folder with your .html file, inside the content folder there are other folders which are self explanatory. Keep only the skin folder that you need to save space on the server.</li>
+			<li>Open responsive-skin-minimal-dark.html with a text editor.</li>
+			<li>The javascript and CSS files must be imported, in the head section of your html file add the below code.</li>
+			<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+				<link rel="stylesheet" type="text/css"  href="content/global.css"/>
+				<script type="text/javascript" src="java/FWDUVPlayer.js"></script></pre>
+			<li>You need a div into which the UVP will be added as a child, create a div and set an id for it, the id is important because it is passed in the UVP constructor, make sure it is unique. The UVP is responsive as follows, the width and height will adapt based on the <span class="boldLi">maxWidth</span> and <span class="boldLi">maxHeight</span> property specified in the constructor, if the page is resized and the prt div width is smaller then the <span class="boldLi">maxWidth</span> property the UVP will adapt its size accordingly.</li>
+			<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+				<div id="myDiv"></div></pre>
+			<li>Next step is to set up the playlists, to do this copy and paste the <span class="boldLi">ul</span> element with the id <span class="boldLi">playlists</span> into the body element, this id is passed into the constructor property <span class="boldLi">playlistsId</span>, this is how the playlists are identified. Illustrated below, please note that the code from the image is minified to save space. For more info about playlists please read <a href="#cat">Setup playlists.</a> </li>
+			<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML3'">
+		<ul id="playlists" style="display:none;">
+			<li data-source="playlist1" data-playlist-name="MY HTML PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-html.jpg">
+				<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My HTML playlist 1</span></p>
+				<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>HTML</p>
+				<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using <strong>HTML markup</strong>, all format are supported and it can have mixed video formats.</p>
+			</li>
+			
+			<li data-source="list=PLxKHVMqMZqUQFbRO0VWaHMaWuQagIgpJe"  data-playlist-name="MY YOUTUBE PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-youtube.jpg">
+				<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My Youtube playlist 1</span></p>
+				<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>YOUTUBE</p>
+				<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created by loading a Youtube playlist, video are loaded and played from Youtube.</p>
+			</li>
+			
+			<li data-source="mixedPlaylist" data-playlist-name="MY MIXED PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-mixed.jpg">
+				<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My mixed playlist 1</span></p>
+				<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>MIXED</p>
+				<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using <strong>HTML markup</strong>, videos are played self or external hosted. or Youtube.</p>
+			</li>
+			
+			<li data-source="https://www.webdesign-flash.ro/p/uvp/content/playlist.xml" data-playlist-name="MY XML PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-xml.jpg">
+				<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My XML playlist 1</span></p>
+				<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>XML</p>
+				<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using a XML file, videos are played self or external hosted. or Youtube.</p>
+			</li>
+			
+			<li data-source="vimeoPlaylist" data-playlist-name="VIMEO PLAYLIST" data-thumbnail-path="content/thumbnails/p-vimeo.jpg">
+				<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">MY VIMEO PLAYLIST 1</span></p>
+				<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>VIMEO</p>
+				<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using <strong>HTML markup</strong>, video are loaded and played from Vimeo.</p>
+			</li>
+			
+			<li data-source="folder=videos" data-playlist-name="MY MP4 FOLDER PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-folder.jpg">
+				<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My mp4 folder playlist 1</span></p>
+				<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>FOLDER</p>
+				<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using a folder with mp4 files, all format are supported and it can have mixed video formats.</p>
+			</li>
+			
+			<li data-source="folder=mp3" data-playlist-name="MY MP3 FOLDER PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-folder.jpg">
+				<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My mp3 folder playlist 1</span></p>
+				<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>FOLDER</p>
+				<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using a folder with mp3 files, mp3 files are loaded and played from the server.</p>
+			</li>
+		</ul>
+		
+				</pre>
+			
+			<li>Next step is to initialize the UVP with javascript, in the head section of your html page add the below code. Please note that all parameters are described in the <a href="#config">constructor parameters</a> section.</li>
+			<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML4'">
+			<script type="text/javascript">
+			FWDUVPUtils.onReady(function(){
+
+				new FWDUVPlayer({		
+					
+				//main settings
+				instanceName:"player1",
+				parentId:"myDiv",
+				playlistsId:"playlists",
+				mainFolderPath:"content",
+				skinPath:"minimal_skin_dark",
+				displayType:"responsive",
+				youtubeAPIKey:"",
+				initializeOnlyWhenVisible:"no",
+				useVectorIcons:"no",
+				fillEntireVideoScreen:"no",
+				goFullScreenOnButtonPlay:"no",
+				playsinline:"yes",
+				useHEXColorsForSkin:"no",
+				normalHEXButtonsColor:"#FF0000",
+				googleAnalyticsTrackingCode:"",
+				useResumeOnPlay:"no",
+				useDeepLinking:"yes",
+				addKeyboardSupport:"yes",
+				showPreloader:"yes",
+				preloaderBackgroundColor:"#000000",
+				preloaderFillColor:"#FFFFFF",
+				autoScale:"yes",
+				showButtonsToolTip:"yes", 
+				stopVideoWhenPlayComplete:"no",
+				playAfterVideoStop:"no",
+				autoPlay:"no",
+				loop:"no",
+				shuffle:"no",
+				showErrorInfo:"yes",
+				maxWidth:980,
+				maxHeight:552,
+				buttonsToolTipHideDelay:1.5,
+				volume:.8,
+				backgroundColor:"#000000",
+				videoBackgroundColor:"#000000",
+				posterBackgroundColor:"#000000",
+				buttonsToolTipFontColor:"#5a5a5a",
+				//logo settings
+				showLogo:"yes",
+				hideLogoWithController:"yes",
+				logoPosition:"topRight",
+				logoLink:"http://www.webdesign-flash.ro/",
+				logoMargins:10,
+				//playlists/categories settings
+				showPlaylistsSearchInput:"yes",
+				usePlaylistsSelectBox:"yes",
+				showPlaylistsButtonAndPlaylists:"yes",
+				showPlaylistsByDefault:"no",
+				thumbnailSelectedType:"opacity",
+				startAtPlaylist:0,
+				buttonsMargins:0,
+				thumbnailMaxWidth:350, 
+				thumbnailMaxHeight:350,
+				horizontalSpaceBetweenThumbnails:40,
+				verticalSpaceBetweenThumbnails:40,
+				inputBackgroundColor:"#333333",
+				inputColor:"#999999",
+				//playlist settings
+				showPlaylistButtonAndPlaylist:"yes",
+				playlistPosition:"right",
+				showPlaylistByDefault:"yes",
+				showPlaylistName:"yes",
+				showSearchInput:"yes",
+				showLoopButton:"yes",
+				showShuffleButton:"yes",
+				showNextAndPrevButtons:"yes",
+				showThumbnail:"yes",
+				showOnlyThumbnail:"no",
+				forceDisableDownloadButtonForFolder:"yes",
+				addMouseWheelSupport:"yes",
+				startAtRandomVideo:"no",
+				stopAfterLastVideoHasPlayed:"no",
+				randomizePlaylist:'no',
+				folderVideoLabel:"VIDEO ",
+				playlistRightWidth:310,
+				playlistBottomHeight:599,
+				startAtVideo:0,
+				maxPlaylistItems:50,
+				thumbnailWidth:70,
+				thumbnailHeight:70,
+				spaceBetweenControllerAndPlaylist:1,
+				spaceBetweenThumbnails:2,
+				scrollbarOffestWidth:8,
+				scollbarSpeedSensitivity:.5,
+				playlistBackgroundColor:"#000000",
+				playlistNameColor:"#FFFFFF",
+				thumbnailNormalBackgroundColor:"#1b1b1b",
+				thumbnailHoverBackgroundColor:"#313131",
+				thumbnailDisabledBackgroundColor:"#272727",
+				searchInputBackgroundColor:"#000000",
+				searchInputColor:"#999999",
+				youtubeAndFolderVideoTitleColor:"#FFFFFF",
+				folderAudioSecondTitleColor:"#999999",
+				youtubeOwnerColor:"#888888",
+				youtubeDescriptionColor:"#888888",
+				mainSelectorBackgroundSelectedColor:"#FFFFFF",
+				mainSelectorTextNormalColor:"#FFFFFF",
+				mainSelectorTextSelectedColor:"#000000",
+				mainButtonBackgroundNormalColor:"#212021",
+				mainButtonBackgroundSelectedColor:"#FFFFFF",
+				mainButtonTextNormalColor:"#FFFFFF",
+				mainButtonTextSelectedColor:"#000000",
+				//controller settings
+				showController:"yes",
+				showControllerWhenVideoIsStopped:"yes",
+				showNextAndPrevButtonsInController:"no",
+				showRewindButton:"yes",
+				showPlaybackRateButton:"yes",
+				showVolumeButton:"yes",
+				showTime:"yes",
+				showOnlyThumbnail:"no",
+				showQualityButton:"yes",
+				showInfoButton:"yes",
+				showDownloadButton:"yes",
+				showFacebookButton:"yes",
+				showEmbedButton:"yes",
+				showChromecastButton:"no",
+				showFullScreenButton:"yes",
+				disableVideoScrubber:"no",
+				showScrubberWhenControllerIsHidden:"yes",
+				showDefaultControllerForVimeo:"no",
+				showMainScrubberToolTipLabel:"yes",
+				repeatBackground:"yes",
+				controllerHeight:37,
+				controllerHideDelay:3,
+				startSpaceBetweenButtons:7,
+				spaceBetweenButtons:8,
+				scrubbersOffsetWidth:2,
+				mainScrubberOffestTop:14,
+				timeOffsetLeftWidth:5,
+				timeOffsetRightWidth:3,
+				timeOffsetTop:0,
+				volumeScrubberHeight:80,
+				volumeScrubberOfsetHeight:12,
+				timeColor:"#888888",
+				youtubeQualityButtonNormalColor:"#888888",
+				youtubeQualityButtonSelectedColor:"#FFFFFF",
+				scrubbersToolTipLabelBackgroundColor:"#FFFFFF",
+				scrubbersToolTipLabelFontColor:"#5a5a5a",
+				//advertisement on pause window
+				aopwTitle:"Advertisement",
+				aopwWidth:400,
+				aopwHeight:240,
+				aopwBorderSize:6,
+				aopwTitleColor:"#FFFFFF",
+				//subtitle
+				subtitlesOffLabel:"Subtitle off",
+				//popup add windows
+				showPopupAdsCloseButton:"yes",
+				//embed window and info window
+				embedAndInfoWindowCloseButtonMargins:15,
+				borderColor:"#333333",
+				mainLabelsColor:"#FFFFFF",
+				secondaryLabelsColor:"#a1a1a1",
+				shareAndEmbedTextColor:"#5a5a5a",
+				inputBackgroundColor:"#000000",
+				inputColor:"#FFFFFF",
+				//audio visualizer
+				audioVisualizerLinesColor:"#0099FF",
+				audioVisualizerCircleColor:"#FFFFFF",
+				//lightbox settings
+				closeLightBoxWhenPlayComplete:"no",
+				lightBoxBackgroundOpacity:.6,
+				lightBoxBackgroundColor:"#000000",
+				//sticky on scroll
+				stickyOnScroll:"no",
+				stickyOnScrollShowOpener:"yes",
+				stickyOnScrollWidth:"700",
+				stickyOnScrollHeight:"394",
+				//sticky display settings
+				showOpener:"yes",
+				showOpenerPlayPauseButton:"yes",
+				verticalPosition:"bottom",
+				horizontalPosition:"center",
+				showPlayerByDefault:"yes",
+				animatePlayer:"yes",
+				openerAlignment:"right",
+				mainBackgroundImagePath:"content/minimal_skin_dark/main-background.png",
+				openerEqulizerOffsetTop:-1,
+				openerEqulizerOffsetLeft:3,
+				offsetX:0,
+				offsetY:0,
+				//loggin
+				isLoggedIn:"no",
+				playVideoOnlyWhenLoggedIn:"yes",
+				loggedInMessage:"Please login to view this video.",
+				//playback rate / speed
+				defaultPlaybackRate:1, //0.25, 0.5, 1, 1.25, 1.2, 2
+				//cuepoints
+				executeCuepointsOnlyOnce:"no",
+				//ads
+				openNewPageAtTheEndOfTheAds:"no",
+				playAdsOnlyOnce:"no",
+				adsButtonsPosition:"left",
+				skipToVideoText:"You can skip to video in: ",
+				skipToVideoButtonText:"Skip Ad",
+				adsTextNormalColor:"#888888",
+				adsTextSelectedColor:"#FFFFFF",
+				adsBorderNormalColor:"#666666",
+				adsBorderSelectedColor:"#FFFFFF",
+				//a to b loop
+				useAToB:"yes",
+				atbTimeBackgroundColor:"transparent",
+				atbTimeTextColorNormal:"#888888",
+				atbTimeTextColorSelected:"#000000",
+				atbButtonTextNormalColor:"#FFFFFF",
+				atbButtonTextSelectedColor:"#FFFFFF",
+				atbButtonBackgroundNormalColor:"#888888",
+				atbButtonBackgroundSelectedColor:"#000000",
+				// context menu
+				showContextmenu:'yes',
+				showScriptDeveloper:"no",
+				contextMenuBackgroundColor:"#1f1f1f",
+				contextMenuBorderColor:"#1f1f1f",
+				contextMenuSpacerColor:"#333",
+				contextMenuItemNormalColor:"#888888",
+				contextMenuItemSelectedColor:"#FFFFFF",
+				contextMenuItemDisabledColor:"#444"
+				});
+			});
+		</script></pre>
+        </ul>   
+		<p>This is how the player is installed in a HTML page, please read the  <a href="#config">Constructor parameters</a> section to understand the Ultimate Video Player properties</p>
+		
+		<h4><strong>Lightbox installation.</strong> - <a href="#toc">top</a></h4>
+		<p>To install the UVP player in lightbox the exact same steps as in the <a href="#instalation">Responsive installation</a> must be followed, the only difference is that the <span class="boldLi">displyType</span> property must be set to <span class="boldLi">lightbox</span> as follows : <span class="boldLi">displyType:"lightbox"</span>. Inside the start folder there is a HTML file as reference called LIGHTBOX-example.html.</p>
+		
+		<h4><strong>Sticky installation.</strong> - <a href="#toc">top</a></h4>
+		<p>To install the UVP player in a sticky display type the exact same steps as in the <a href="#instalation">Responsive installation</a> must be followed, the only difference is that the <span class="boldLi">displyType</span> property must be set to <span class="boldLi">sticky</span> as follows : <span class="boldLi">displyType:"sticky"</span>. Inside the start folder there is a HTML file as reference called STICKY-example.html.</p>
+		
+		<h3 id="fullscreen"><strong>C) Install Ultimate Video Player in fullscreen and popup and popup.</strong> - <a href="#toc">top</a></h3>
+		<p>To install the UVP player in fullscreen the exact same steps as in the <a href="#instalation">Embed Ultimate Video Player into your html page</a> must be followed, the only difference is that the <span class="boldLi">displayType</span> property must be set to <span class="boldLi">fullscreen</span> as follows : <span class="boldLi">displayType:"fullscreen"</span>. Inside the start folder there are html files examples for each skins, this examples are starting with the label "fullscreen".</p>
+		
+		<p>To popup the UVP there is a POPUP-example.html example includded in the start file. Please check out the source to see how this is accomplished.</p>
+		
+		<h3 id="config"><strong>D) Constructor parameters.</strong> - <a href="#toc">top</a></h3>
+		<p>Please open any of the .html files provided with a text editor as reference.</p>
+		<p>These parameters represents the possible setting for the Ultimate Video Player they are all visible below.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+			<script type="text/javascript">
+			FWDUVPUtils.onReady(function(){
+				
+				new FWDUVPlayer({		
+					
+				//main settings
+				instanceName:"player1",
+				parentId:"myDiv",
+				playlistsId:"playlists",
+				mainFolderPath:"content",
+				skinPath:"minimal_skin_dark",
+				displayType:"responsive",
+				youtubeAPIKey:"",
+				initializeOnlyWhenVisible:"no",
+				useVectorIcons:"no",
+				fillEntireVideoScreen:"no",
+				goFullScreenOnButtonPlay:"no",
+				playsinline:"yes",
+				useHEXColorsForSkin:"no",
+				normalHEXButtonsColor:"#FF0000",
+				googleAnalyticsTrackingCode:"",
+				useResumeOnPlay:"no",
+				useDeepLinking:"yes",
+				addKeyboardSupport:"yes",
+				showPreloader:"yes",
+				preloaderBackgroundColor:"#000000",
+				preloaderFillColor:"#FFFFFF",
+				autoScale:"yes",
+				showButtonsToolTip:"yes", 
+				stopVideoWhenPlayComplete:"no",
+				playAfterVideoStop:"no",
+				autoPlay:"no",
+				loop:"no",
+				shuffle:"no",
+				showErrorInfo:"yes",
+				maxWidth:980,
+				maxHeight:552,
+				buttonsToolTipHideDelay:1.5,
+				volume:.8,
+				backgroundColor:"#000000",
+				videoBackgroundColor:"#000000",
+				posterBackgroundColor:"#000000",
+				buttonsToolTipFontColor:"#5a5a5a",
+				//logo settings
+				showLogo:"yes",
+				hideLogoWithController:"yes",
+				logoPosition:"topRight",
+				logoLink:"http://www.webdesign-flash.ro/",
+				logoMargins:10,
+				//playlists/categories settings
+				showPlaylistsSearchInput:"yes",
+				usePlaylistsSelectBox:"yes",
+				showPlaylistsButtonAndPlaylists:"yes",
+				showPlaylistsByDefault:"no",
+				thumbnailSelectedType:"opacity",
+				startAtPlaylist:0,
+				buttonsMargins:0,
+				thumbnailMaxWidth:350, 
+				thumbnailMaxHeight:350,
+				horizontalSpaceBetweenThumbnails:40,
+				verticalSpaceBetweenThumbnails:40,
+				inputBackgroundColor:"#333333",
+				inputColor:"#999999",
+				//playlist settings
+				showPlaylistButtonAndPlaylist:"yes",
+				playlistPosition:"right",
+				showPlaylistByDefault:"yes",
+				showPlaylistName:"yes",
+				showSearchInput:"yes",
+				showLoopButton:"yes",
+				showShuffleButton:"yes",
+				showPlaylistOnFullScreen:"no",
+				showNextAndPrevButtons:"yes",
+				showThumbnail:"yes",
+				forceDisableDownloadButtonForFolder:"yes",
+				addMouseWheelSupport:"yes",
+				startAtRandomVideo:"no",
+				stopAfterLastVideoHasPlayed:"no",
+				randomizePlaylist:'no',
+				folderVideoLabel:"VIDEO ",
+				playlistRightWidth:310,
+				playlistBottomHeight:599,
+				startAtVideo:0,
+				maxPlaylistItems:50,
+				thumbnailWidth:70,
+				thumbnailHeight:70,
+				spaceBetweenControllerAndPlaylist:1,
+				spaceBetweenThumbnails:2,
+				scrollbarOffestWidth:8,
+				scollbarSpeedSensitivity:.5,
+				playlistBackgroundColor:"#000000",
+				playlistNameColor:"#FFFFFF",
+				thumbnailNormalBackgroundColor:"#1b1b1b",
+				thumbnailHoverBackgroundColor:"#313131",
+				thumbnailDisabledBackgroundColor:"#272727",
+				searchInputBackgroundColor:"#000000",
+				searchInputColor:"#999999",
+				youtubeAndFolderVideoTitleColor:"#FFFFFF",
+				folderAudioSecondTitleColor:"#999999",
+				youtubeOwnerColor:"#888888",
+				youtubeDescriptionColor:"#888888",
+				mainSelectorBackgroundSelectedColor:"#FFFFFF",
+				mainSelectorTextNormalColor:"#FFFFFF",
+				mainSelectorTextSelectedColor:"#000000",
+				mainButtonBackgroundNormalColor:"#212021",
+				mainButtonBackgroundSelectedColor:"#FFFFFF",
+				mainButtonTextNormalColor:"#FFFFFF",
+				mainButtonTextSelectedColor:"#000000",
+				//controller settings
+				showController:"yes",
+				showControllerWhenVideoIsStopped:"yes",
+				showNextAndPrevButtonsInController:"no",
+				showRewindButton:"yes",
+				showPlaybackRateButton:"yes",
+				showVolumeButton:"yes",
+				showTime:"yes",
+				showQualityButton:"yes",
+				showInfoButton:"yes",
+				showDownloadButton:"yes",
+				showFacebookButton:"yes",
+				showEmbedButton:"yes",
+				showChromecastButton:"no",
+				showFullScreenButton:"yes",
+				disableVideoScrubber:"no",
+				showScrubberWhenControllerIsHidden:"yes",
+				showDefaultControllerForVimeo:"no",
+				repeatBackground:"yes",
+				controllerHeight:37,
+				controllerHideDelay:3,
+				startSpaceBetweenButtons:7,
+				spaceBetweenButtons:8,
+				scrubbersOffsetWidth:2,
+				mainScrubberOffestTop:14,
+				timeOffsetLeftWidth:5,
+				timeOffsetRightWidth:3,
+				timeOffsetTop:0,
+				volumeScrubberHeight:80,
+				volumeScrubberOfsetHeight:12,
+				timeColor:"#888888",
+				youtubeQualityButtonNormalColor:"#888888",
+				youtubeQualityButtonSelectedColor:"#FFFFFF",
+				scrubbersToolTipLabelBackgroundColor:"#FFFFFF",
+				scrubbersToolTipLabelFontColor:"#5a5a5a",
+				//advertisement on pause window
+				aopwTitle:"Advertisement",
+				aopwWidth:400,
+				aopwHeight:240,
+				aopwBorderSize:6,
+				aopwTitleColor:"#FFFFFF",
+				//subtitle
+				subtitlesOffLabel:"Subtitle off",
+				//popup add windows
+				showPopupAdsCloseButton:"yes",
+				//embed window and info window
+				embedAndInfoWindowCloseButtonMargins:15,
+				borderColor:"#333333",
+				mainLabelsColor:"#FFFFFF",
+				secondaryLabelsColor:"#a1a1a1",
+				shareAndEmbedTextColor:"#5a5a5a",
+				inputBackgroundColor:"#000000",
+				inputColor:"#FFFFFF",
+				//audio visualizer
+				audioVisualizerLinesColor:"#0099FF",
+				audioVisualizerCircleColor:"#FFFFFF",
+				//lightbox settings
+				closeLightBoxWhenPlayComplete:"no",
+				lightBoxBackgroundOpacity:.6,
+				lightBoxBackgroundColor:"#000000",
+				//sticky on scroll
+				stickyOnScroll:"no",
+				stickyOnScrollShowOpener:"yes",
+				stickyOnScrollWidth:"700",
+				stickyOnScrollHeight:"394",
+				//sticky display settings
+				showOpener:"yes",
+				showOpenerPlayPauseButton:"yes",
+				verticalPosition:"bottom",
+				horizontalPosition:"center",
+				showPlayerByDefault:"yes",
+				animatePlayer:"yes",
+				openerAlignment:"right",
+				mainBackgroundImagePath:"content/minimal_skin_dark/main-background.png",
+				openerEqulizerOffsetTop:-1,
+				openerEqulizerOffsetLeft:3,
+				offsetX:0,
+				offsetY:0,
+				//loggin
+				isLoggedIn:"no",
+				playVideoOnlyWhenLoggedIn:"yes",
+				loggedInMessage:"Please login to view this video.",
+				//playback rate / speed
+				defaultPlaybackRate:1, //0.25, 0.5, 1, 1.25, 1.2, 2
+				//cuepoints
+				executeCuepointsOnlyOnce:"no",
+				//ads
+				openNewPageAtTheEndOfTheAds:"no",
+				playAdsOnlyOnce:"no",
+				adsButtonsPosition:"left",
+				skipToVideoText:"You can skip to video in: ",
+				skipToVideoButtonText:"Skip Ad",
+				adsTextNormalColor:"#888888",
+				adsTextSelectedColor:"#FFFFFF",
+				adsBorderNormalColor:"#666666",
+				adsBorderSelectedColor:"#FFFFFF",
+				//a to b loop
+				useAToB:"yes",
+				atbTimeBackgroundColor:"transparent",
+				atbTimeTextColorNormal:"#888888",
+				atbTimeTextColorSelected:"#000000",
+				atbButtonTextNormalColor:"#FFFFFF",
+				atbButtonTextSelectedColor:"#FFFFFF",
+				atbButtonBackgroundNormalColor:"#888888",
+				atbButtonBackgroundSelectedColor:"#000000",
+				// context menu
+				showContextmenu:'yes',
+				showScriptDeveloper:"no",
+				contextMenuBackgroundColor:"#1f1f1f",
+				contextMenuBorderColor:"#1f1f1f",
+				contextMenuSpacerColor:"#333",
+				contextMenuItemNormalColor:"#888888",
+				contextMenuItemSelectedColor:"#FFFFFF",
+				contextMenuItemDisabledColor:"#444"
+				});
+			});
+		</script></pre>
+		<p>//-- global settings --//</p>
+		<ul>
+			<li><span class="boldLi">FWDUVPlayer.videoStartBehaviour</span>:"pause" -  this can be stop, pause or none. If set to pause and more then one instance is used all instances will pause except the current playing instance otherwise if set to stop all instances will stop playing and stop the download precess except the current playing instance. If none is used when playing one instance will not stop or pause other instances.</li>
+		</ul>
+		
+		//-- main settings --//
+		<ul>
+        	<li><span class="boldLi">instanceName</span>:"player1" - The player instance name, trough this instance the API is called for example if the instance name is "player1" and if you want to call play() method it is called like this player1.play();.</li>
+			<li><span class="boldLi">parentId</span>:"myDiv" - The id of the div into which the UVP is added, this id must be unique.</li>
+			<li><span class="boldLi">playlistsId</span>:"playlists" - The id of the <span class="boldLi">ul</span> html element that represents the playlists, for more info please read <a href="#cat">Setup playlists</a>.</li>
+			<li><span class="boldLi">mainFolderPath</span>:"content" - The main folder path. This folder contains some important files like the php files and the mp4 video files, in this folder you need to add your mp4 video folders or mp4 video files.</li>
+			<li><span class="boldLi">skinPath</span>:"content/minimal_skin_dark" - The skin path, the folder that contains the skin graphics.</li>
+			<li><span class="boldLi">displayType</span>:"responsive" - This can be responsive or fullscreen, if you want to embed the player in your page inside the div then set this to responsive, if you want the player to always fill the browser window width and height set it to fullscreen.</li>
+			<li><span class="boldLi">youtubeAPIKey</span>:"" - If you are using youtube playlists please replace this key with your own, for more detials please watch this <a href="https://www.youtube.com/watch?v=whcjAjftBL0&feature=youtu.be" target="_blank">video tutorial</a> .</li>
+			<li><span class="boldLi">initializeOnlyWhenVisible</span>:"no" - Lazy scrolling / loading, the posibility to initialize UVP on scroll when the player is visible in the page, this way for example if the player is in a section of a webpage that is not visible it will not be initialized / play, instead UVP will be initalized / play only when the user is scrolling to that section in which the player is added.</li>
+			<li><span class="boldLi">useVectorIcons</span>:"no" - this can be yes or no, if is set to yes the buttons will load font awesome vector based icon otherwise it will load the default png graphics buttons. Personally I prefer the graphic png based buttons because of the pixel perfection positioning.</li>
+			<li><span class="boldLi">fillEntireVideoScreen</span>:"no" - this can be yes or no, if is set to yes the video will fill the entire available space removing any horizontal or vertical gaps based on the video size, if is left to no it will resize the video normally <a href="http://www.webdesign-flash.ro/p/uvp/fuvp.html">example here</a>.</li>
+			<li><span class="boldLi">goFullScreenOnButtonPlay</span>:"no" - This can be yes or no, if set to yes when the play button is clicked the player will go fullscreen as well.</li>
+			<li><span class="boldLi">playsinline</span>:"yes" - this can be yes or no, it applies only to IOS / iphone, if you want the iphone to use the default operating system video player set this to no otherwise set it to yes.</li>	
+			<li><span class="boldLi">useHEXColorsForSkin</span>:"no" - this can be yes or no, if this is set to yes the player skin colors can be modified with hexadecimal colors, a skin normal and selected state can be set, please note that there are two special skins that we created for this feature that works perfectly, they can be found in the hex_white and hex_dark folder under the content folder so please use this skins if you are planning to use this feature,itwill work with the other skins also but it is possible that the colors will not be exactlly how you want because of the way the Math behind this works, as a note the white color on the skin will be filled 100% with the hex colors, the dark collor will be filed 0% with the hex color and everything in between will be aproximated as best as possible, this sounds more complicated then it actually is :)  <a href="http://www.webdesign-flash.ro/p/uvp/hex.html">example here</a>.</li>
+			<li><span class="boldLi">normalHEXButtonsColor</span>:"#FF0000" - The hexadecimal color for the skin normal state.</li>
+			<li><span class="boldLi">googleAnalyticsTrackingCode</span>:"yes" - Google analytics tracking code.</li>
+			<li><span class="boldLi">useResumeOnPlay</span>:"no" - this can be yes or no. If you want the player to resume playing from the position when the browser was closed set this option to yes.</li>
+			<li><span class="boldLi">useDeepLinking</span>:"yes" - this can be yes or no. Allow or not deeplinking, if deeplinking is disabled the facebook share button will share the current page url.</li>
+			<li><span class="boldLi">addKeyboardSupport</span>:"yes" - this can be yes or no. Enable or disable the keyboard space bar to pause or play the video.</li>
+			<li><span class="boldLi">showPreloader</span>:"yes" - this can be yes or no. Hide or show the circular preloader.</li>
+			<li><span class="boldLi">preloaderBackgroundColor</span>:"#000000" - circular preloader background color.</li>
+			<li><span class="boldLi">preloaderFillColor</span>:"#FF0000" - circular preloader fill color.</li>
+			<li><span class="boldLi">autoPlay</span>:"no" - this can be yes or no. Please note that autoplay is only possible if the video starts muted to  comply with the browser <a href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes" target="_blank">autoplay policy</a>.</li>
+			<li><span class="boldLi">autoPlayText</span>:"Click To Unmute" - the unmute autoplay button text, if you don't want this button leave this option blank.</li>
+			<li><span class="boldLi">loop</span>:"no" - this can be yes or no.</li>
+			<li><span class="boldLi">shuffle</span>:"yes" - this can be yes or no. If this is set to no the info error will not be showed even if there is an error or warning so it would be impossible to tell what is wrong. </li>
+			<li><span class="boldLi">showErrorInfo</span>:"no" - this can be yes or no.</li>
+			<li><span class="boldLi">autoScale</span>:"yes" - this can be yes or no.If set to yes the UVP height will always be proportional to the UVP width, if set to no the height will be fixed based on the <span class="boldLi">maxHeight</span> property.</li>
+			<li><span class="boldLi">showButtonsToolTip</span>:"yes" - this can be yes or no, enable or disable the control bar button tooltips.</li>
+			<li><span class="boldLi">stopVideoWhenPlayComplete</span>:"yes" - this can be yes or no, if this is enabled when the video playback is complete the video will stop and the poster if any is showed.</li>
+			<li><span class="boldLi">playAfterVideoStop</span>:"yes" - this can be yes or no, if the video is set to stop at a specific time by default it will stop but if you want to skip to the next video set this feature to yes.</li>
+			<li><span class="boldLi">buttonsToolTipHideDelay</span>:1.5 - delay in seconds until the button tooltip appears when the button is hovered.</li>
+			<li><span class="boldLi">maxWidth</span>:750 - a number that represents the player maximum width in pixels, think of this property as it would be the max-width css property (only applies if the  <span class="boldLi">displayType</span> is <span class="boldLi">responsive</span>).</li>
+			<li><span class="boldLi">maxHeight</span>:750 - a number that represents the player maximum height in pixels, think of this property as it would be the max-height css property (only applies if the <span class="boldLi">displayType</span> is <span class="boldLi">responsive</span>).</li>
+			<li><span class="boldLi">volume</span>:.8 - A number from 0.1 to 1 that represents the volume level.</li>
+			<li><span class="boldLi">backgroundColor</span>:"#000000" - the main background color.</li>
+			<li><span class="boldLi">videoBackgroundColor</span>:"#000000" - the video background color, this doesn't apply to the youtube player.</li>
+			<li><span class="boldLi">posterBackgroundColor</span>:"#000000" - The video poster background color, if you want a transparent background set this to transparent.</li>
+			<li><span class="boldLi">buttonsToolTipFontColor</span>:"#000000" - The buttons tooltip color.</li>
+		</ul>
+		
+		//advertisement on pause window
+		<ul>
+			<li><span class="boldLi">aopwTitle</span>:"Advertisement" - The pause ad window title.</li>
+			<li><span class="boldLi">aopwSource</span>:""- The pause ad window source, this has to be a link to a page that will show up in the window, for example http://www.webdesign-flash.ro/iframe.html , the page can contain anything.</li>
+			<li><span class="boldLi">aopwWidth</span>:400- The pause ad window maximum width.</li>
+			<li><span class="boldLi">aopwWidth</span>:240- The pause ad window maximum height.</li>
+			<li><span class="boldLi">aopwBorderSize</span>:4- The pause ad window border height in px.</li>
+			<li><span class="boldLi">aopwTitleColor</span>:"#FFFFFF"- The pause ad window title color.</li>
+		</ul>
+		
+		//-- logo settings --//
+		<ul>
+			<li><span class="boldLi">showLogo</span>:"yes" - This can be yes or no, hides or show the logo.</li>
+			<li><span class="boldLi">hideLogoWithController</span>:"yes" - This can be yes or no. If is set to yes the logo will hide when the controller hides otherwise it will always be visible over the video.</li>
+			<li><span class="boldLi">logoPosition</span>:"topRight" - This can be topRight, topLeft, bottomRight, bottomLeft, used to position the logo in one of the video corners.</li>
+			<li><span class="boldLi">logoLink</span>:"http://www.yourlink.com" - The page link that will open when the logo is clicked, the <span class="boldLi">none</span> value will disable this feature.</li>
+			<li><span class="boldLi">logoMargins</span>:"20" - Margins in px to push the logo from the video corners.</li>
+		</ul>
+		
+		//-- playlists / categories window settings --//
+		<ul>
+			
+			<li><span class="boldLi">showPlaylistsSearchInput</span>:"yes" - this can be yes or no, disable or enable the playlists / cateogries search input.</li>
+			<li><span class="boldLi">usePlaylistsSelectBox</span>:"yes" - this can be yes or no, disable or enable the playlists / cateogries combobox selector.</li>
+			<li><span class="boldLi">showPlaylistsButtonAndPlaylists</span>:"yes" - this can be yes or no, disable or enable the playlists button and playlists window.</li>
+			<li><span class="boldLi">showPlaylistsByDefault</span>:"yes" - this can be yes or no, if this is set to yes the playlists window is showed as soon as the Ultimate Video Player is loaded and displayed.</li>
+			<li><span class="boldLi">thumbnailSelectedType</span>:"opacity" - this can be threshold, opacity or blackAndWhite, it represents the playlist thumbnail selected state (please note that this setting is always opacity when tested local or on a mobile device).</li>
+			<li><span class="boldLi">startAtPlaylist</span>:0 - a number that represents the playlist that will be loaded when the UVP loads the first time, if deeplinking is used and the browser url has a playlist link this option is ignored. The playlists count starts from 0 (zero).</li>
+			<li><span class="boldLi">buttonsMargins</span>:0 - Margins for the next, previous and close buttons.</li>
+			<li><span class="boldLi">thumbnailMaxWidth</span>:330 - a number that represents the thumbnail maximum width, the width of the thumbnail will vary based on the available space but it will never be higher then this option.</li>
+			<li><span class="boldLi">thumbnailMaxHeight</span>:330 - a number that represents the thumbnail maximum width in pixels, the height of the thumbnail will vary based on the available space but it will never be higher then this option.</li>
+			<li><span class="boldLi">horizontalSpaceBetweenThumbnails</span>:40 - a number that represents the horizontal space in pixels between thumbnails.</li>
+			<li><span class="boldLi">verticalSpaceBetweenThumbnails</span>:40 - a number that represents the vertical space in pixels between thumbnails.</li>
+		</ul>
+		
+		//-- playlist settings --//
+		<ul>
+			<li><span class="boldLi">showPlayListButtonAndPlaylist</span>:"yes" - this can be yes or no. Disable or enable (hide or show) the playlist button and playlist.</li>
+			<li><span class="boldLi">playlistPosition</span>:"bottom" - this can be bottom or right.</li>
+			<li><span class="boldLi">showPlayListByDefault</span>:"yes" - this can be yes or no, if this is set to yes the playlist is showed as soon as the UVP is loaded and displayed otherwise the playlist is hidden and it will only appear if the playlist button is clicked or touched.</li>
+			<li><span class="boldLi">showPlaylistName</span>:"yes" - this can be yes or no. Disable or enable the playlist name.</li>
+			<li><span class="boldLi">showSearchInput</span>:"yes" - this can be yes or no. Disable or enable the search input.</li>
+			<li><span class="boldLi">showLoopButton</span>:"yes" - this can be yes or no. Hide or show the loop button.</li>
+			<li><span class="boldLi">showShuffleButton</span>:"yes" - this can be yes or no. Hide or show the shuffle button.</li>
+			<li><span class="boldLi">showPlaylistOnFullScreen</span>:"yes" - this can be yes or no. By default when the player goes in fullscreen the playlist is hidden, if you don't want this to happen set this option to yes (please note that if the browser viewport width is smaller then 1000 px the playlist will be hidden regardless if this option is set to yes because there is not enough room to display both playlist and video screen).</li>
+			<li><span class="boldLi">showNextAndPrevButtons</span>:"yes" - this can be yes or no. Hide or show the next and prev playlist buttons.</li>
+			<li><span class="boldLi">forceDisableDownloadButtonForFolder</span>:"yes" - this can be yes or no. Disable or enable the download button for a playlist that is loading videos from a folder.</li>
+			<li><span class="boldLi">addMouseWheelSupport</span>:"yes" - this can be yes or no.</li>
+			<li><span class="boldLi">addScrollOnMouseMove</span>:"no" - this can be yes or no.</li>
+			<li><span class="boldLi">showThumbnail</span>:"yes" - this can be yes or no. It shows or not the playlsit thumbnails.</li>
+			<li><span class="boldLi">showOnlyThumbnail</span>:"no" - this can be yes or no. If is set to yes only the thumbnails images are showed in the playlist, the text is removed.</li>
+			<li><span class="boldLi">startAtRandomVideo</span>:"yes" - this can be yes or no, if this is set to yes the playlist loads first time a random video will play. </li>
+			<li><span class="boldLi">stopAfterLastVideoHasPlayed</span>:"no" - this can be yes or no, if this is set to yes when the last video in the playlist has finished to play the playlist will not loop (the first video from the playlist will not play). </li>
+			<li><span class="boldLi">randomizePlaylist</span>:"no" - this can be yes or no. If set to yes the playlist will be randomized every time it loads.</li>
+			<li><span class="boldLi">folderVideoLabel</span>:"Video - " - this represents the start label for videos that are loaded from a folder, after this label the counting video number will be added by the script for example Video - 1, Video - 2 etc.</li>
+			<li><span class="boldLi">playlistRightWidth</span>:310 - The playlist width when it is positioned at the right.</li>
+			<li><span class="boldLi">playlistBottomHeight</span>:310 - The playlist height when it is positioned at the bottom.</li>
+			<li><span class="boldLi">startAtVideo</span>:"0" - a number that represents the video that will be loaded when the UVP loads the first time, if deeplinking is used and the browser url has a video link this option is ignored. The video count starts from 0 (zero).</li>
+			<li><span class="boldLi">maxPlaylistItems</span>:50 - this is useful if the number of playlist items must be limited, for example if a playlist is loaded from Youtube and it has 1000 videos it will be to large to display so the playlist will display only 50 videos, if you want to load the total available videos without limitation set this number to a large number like 10000.</li>
+			<li><span class="boldLi">thumbnailWidth</span>:70 - thumbnails width in pixels.</li>
+			<li><span class="boldLi">thumbnailHeight</span>:70 - thumbnails height in pixels.</li>
+			<li><span class="boldLi">spaceBetweenControlerAndPlaylist</span>:2 - space in pixels between the video control bar and playlist.</li>
+			<li><span class="boldLi">spaceBetweenThumbnails</span>:2 - vertical space in pixels between thumbnails.</li>
+			<li><span class="boldLi">scrollbarOffestWidth</span>:2 - the width to remove from the playlist total width to make room for the playlist scrollbar.</li>
+			<li><span class="boldLi">scollbarSpeedSensitivity</span>:.5 - a number from 0.1 to 1 that represents the scrollbar speed sensitivity.</li>
+			<li><span class="boldLi">playlistBackgroundColor</span>:"#000000" - the playlist background color.</li>
+			<li><span class="boldLi">playlistNameColor</span>:"#FFFFFF" - the playlist name color.</li>
+			<li><span class="boldLi">thumbnailNormalBackgroundColor</span>:"#1b1b1b" - the playlist thumbnail background normal color.</li>
+			<li><span class="boldLi">thumbnailHoverBackgroundColor</span>:"#1b1b1b" - the playlist thumbnail background hover color.</li>
+			<li><span class="boldLi">thumbnailDisabledBackgroundColor</span>:"#1b1b1b" - the playlist thumbnail background selected color.</li>
+			<li><span class="boldLi">thumbnailDisabledBackgroundColor</span>:"#272727" - the playlist thumbnail background selected color.</li>
+			<li><span class="boldLi">searchInputBackgroundColor</span>:"#000000" - the search input background color.</li>
+			<li><span class="boldLi">searchInputColor</span>:"#000000" - the search input color.</li>
+			<li><span class="boldLi">youtubeAndFolderVideoTitleColor</span>:"#FFFFFF" - the title color for videos loaded from youtube, vimeo (if a vimeo album is used as the playlist source) or a video folder.</li>
+			<li><span class="boldLi">folderAudioSecondTitleColor</span>:"#999999" - the second title color for audio loaded from a audio folder.</li>
+			
+			<li><span class="boldLi">youtubeOwnerColor</span>:"#FFFFFF" - the  color for the youtube video owner.</li>
+			<li><span class="boldLi">youtubeDescriptionColor</span>:"#FFFFFF" - the  color of the youtube or vimeo (if a vimeo album is used as the playlist source) video description, this will apply to the text from the info window when the <span class="boldLi">i</span> button is pressed.</li>
+		</ul>
+		
+		
+		//-- audio visualizer --//
+		<ul>
+			<li><span class="boldLi">audioVisualizerLinesColor</span>:"#0099FF" - the color for the audio visualizer lines.</li>
+			<li><span class="boldLi">audioVisualizerCircleColor</span>:"#FFFFFF" - the color for the audio circle.</li>
+		</ul>
+		closeLightBoxWhenPlayComplete:"no",
+		//-- lightbox settings --//
+		<ul>
+			<li><span class="boldLi"><li><span class="boldLi">closeLightBoxWhenPlayComplete</span>:"no" - This can be yes or no. If set to yes when the video finshes playing the lightbox will close.</li>
+			<li><span class="boldLi">lightBoxBackgroundOpacity</span>:0.6 - The ligthbox background color opacity, a number from 0 to 1.</li>
+			<li><span class="boldLi">lightBoxBackgroundColor</span>:"#000000" - The ligthbox background color in hexadecimal value.</li>
+		</ul>
+		
+		//- sticky on scroll settings --/
+		<li><span class="boldLi">stickyOnScroll</span>:"no" - This can be yes or no. If you want show the player in a sticky form when the page is scrolled and the player is not in the viewport area set this to yes otherwise leave it no.</li>
+		<li><span class="boldLi">stickyOnScrollShowOpener</span>:"no" - This can be yes or no.</li>
+		<li><span class="boldLi">stickyOnScrollWidth</span>:700 - The maximum width in px.</li>
+		<li><span class="boldLi">stickyOnScrollHeight</span>:394 - The maximum height in px.</li>
+		
+		//-- sticky display settings --//
+		<ul>
+			<li><span class="boldLi">showOpener</span>:"yes" - this can be yes or no, it hides or shows the UVP opener button.</li>
+			<li><span class="boldLi">showOpenerPlayPauseButton</span>:"yes" - this can be yes or no, it hides or shows the UVP opener play / pause button.</li>
+			<li><span class="boldLi">openerAlignment</span>:"center" - this can be left, center or right and represents the horizontal position / alignment for the small button that show or hide UVP.</li>
+			<li><span class="boldLi">verticalPosition</span>:"boottom" - this can be bottom or top and represents the vertical position / alignment for UVP.</li>
+			<li><span class="boldLi">horizontalPosition</span>:"center" - this can be left, center or right and represents the horizontal position / alignment for UVP.</li>
+			<li><span class="boldLi">showPlayerByDefault</span>:"yes" - this can be yes or no,if this is set to yes UVP will be showed by default otherwise it will be hidden.</li>
+			<li><span class="boldLi">animatePlayer</span>:"yes" - this can be yes or no, if it is set to yes it will animate the player with a tween transition when hidden or showed.</li>
+			<li><span class="boldLi">openerEqulizerOffsetTop</span>:-1 - offset top in px for the opener equalizer, it is useful if the skin is modified to better align the equalizer.</li>
+			<li><span class="boldLi">openerEqulizerOffsetLeft</span>:3 - offset left in px for the opener equalizer, it is useful if the skin is modified to better align the equalizer.</li>
+			<li><span class="boldLi">offsetX</span>:0 - horizontal offset for the UVP instance in px, think of this like margin left or right based on the player horizontal position.</li>
+			<li><span class="boldLi">offsetY</span>:0 - vertical offset for the UVP instance in px, think of this like margin top or bottom based on the player vertical position.</li>
+		</ul>
+		
+		//-- loggin  --//
+		<ul>
+			<li><span class="boldLi">isLoggedIn</span>:"no" - Set this to yes if the user is loggedin, of course you will have to set the value of this parameter based on your website/project.</li>
+			<li><span class="boldLi">playVideoOnlyWhenLoggedIn</span>:"yes" - Set this to yes to allow only a loggedin user to play the video.</li>
+			<li><span class="boldLi">loggedInMessage</span>:"Please login to view this video" - Message to show to users that are not logged it.</li>
+		</ul>
+		
+		//-- controller settings --//
+		<ul>
+			<li><span class="boldLi">showControllerWhenVideoIsStopped</span>:"yes" - this can be yes or no, if this is set to yes the control bar is showed when the video is stopped and the video poster is visible otherwise it the control bar is hidden until the video starts to play.</li>
+			<li><span class="boldLi">showNextAndPrevButtonsInController</span>:"yes" - this can be yes or no. Hide or show the next and prev video button in the control bar.</li>
+			<li><span class="boldLi">showPlaybackRateButton</span>:"yes" - this can be yes or no. Hide or show the playback rate / speed button.</li>
+			
+			<li><span class="boldLi">showVolumeButton</span>:"yes" - this can be yes or no. Hide or show the volume button.</li>
+			<li><span class="boldLi">showTime</span>:"yes" - this can be yes or no. Hide or show the video current and total time indicator.</li>
+			<li><span class="boldLi">showYoutubeQualityButton</span>:"yes" - this can be yes or no. Hide or show the youtube quality button (this only applies if the video is played from Youtube).</li>
+			<li><span class="boldLi">showDownloadButton</span>:"yes" - this can be yes or no. Globally hide or show the video download button.</li>
+			<li><span class="boldLi">showShareButton</span>:"yes" - this can be yes or no. Hide or show the share window button.</li>
+			<li><span class="boldLi">disableVIdeoScrubber</span>:"no" - this can be yes or no. Disable or enable the video scrubber.</li>
+			<li><span class="boldLi">showScrubberWhenControllerIsHidden</span>:"yes" - this can be yes or no. Hides or shows the video scrubber when the controller is hidden.</li>
+			<li><span class="boldLi">showDefaultControllerForVimeo</span>:"no" - this can be yes or no. Normal vimeo videos do not allow to remove the player default controls so leave this option to no, if you are using vimeo pro video and disabled the vimeo video controller set this to yes this way the UVP controller can be used.</li>
+			<li><span class="boldLi">showMainScrubberToolTipLabel</span>:"yes" - this can be yes or no. Hide or show the main scrubber time tooltip indicator.</li>
+			<li><span class="boldLi">showEmbedButton</span>:"yes" - this can be yes or no. Hide or show the embed button.</li>
+			<li><span class="boldLi">showFullScreenButton</span>:"yes" - this can be yes or no. Hide or show the fullscreen button.</li>
+			<li><span class="boldLi">repeatBackground</span>:"yes" - this can be yes or no. Repeat or not the control bar background.</li>
+			<li><span class="boldLi">controllerHeight</span>:70 - the controller height in pixels.</li>
+			<li><span class="boldLi">controllerHideDelay</span>:2 - a number that represents the seconds until the control bar is hiding after a period of inactivity.</li>
+			<li><span class="boldLi">startSpaceBetweenButtons</span>:10 - a number that represents the space between buttons in pixels, illustrated below with the red arrows.</li>
+			<img src="assets/images/startSpaceBetweenButtons.jpg"/>
+			<li><span class="boldLi">spaceBetweenButtons</span>:10 - a number that represents the space between buttons in pixels, illustrated below with the red arrows.</li>
+			<img src="assets/images/spaceBetweenButtons.jpg"/>
+			<li><span class="boldLi">scrubbersOffsetWidth</span>:10 - a number that represents the total amount in pixels removed from the scrubber bars when they are at the end (change this number to understand it better, useful based on the skin type).</li>
+			<li><span class="boldLi">mainScrubberOffestTop</span>:14 - the amount in pixels to push the main scrubber up when the controller is hiding.</li>
+			<li><span class="boldLi">timeOffsetLeftWidth</span>:10 - a number that represents the an addition in px to the space between the time indicator left side and the scrubber.</li>
+			<li><span class="boldLi">timeOffsetRightWidth</span>:10 - a number that represents the an addition in px to the space between the time indicator right side and the neighbor button.</li>
+			<li><span class="boldLi">timeOffsetRightWidth</span>:10 - a number that represents the an addition in px to the space between the time indicator right side and the volume button or any other button that will follow the time indicator.</li>
+			<li><span class="boldLi">timeOffsetTop</span>:10 - a number that represents the an addition in px to time position on the y axis.</li>
+			<li><span class="boldLi">volumeScrubberHeight</span>:70 - the height of the volume scrubbar.</li>
+			<li><span class="boldLi">timeColor</span>:"#888888" - the video time indicator color.</li>
+			<li><span class="boldLi">youtubeQualityButtonNormalColor</span>:"#888888" - the youtube quality buttons text normal color.</li>
+			<li><span class="boldLi">youtubeQualityButtonSelectedColor</span>:"#FFFFFF" - the youtube quality buttons text selected / hover color.</li>
+			<li><span class="boldLi">scrubbersToolTipLabelBackgroundColor</span>:"#FFFFFF" - main scrubber tooltip background color.</li>
+			<li><span class="boldLi">scrubbersToolTipLabelFontColor</span>:"#5a5a5a" - main scrubber tooltip text color.</li>
+		</ul>
+		
+		//-- subtitle --//
+		<ul>
+			<li><span class="boldLi">subtitlesOffLabel</span>:"Subtitles off" - the off subtitle buttons button label.</li>
+		</ul>
+		
+		//-- embed window and info window --//
+		<ul>
+			<li><span class="boldLi">embedWindowCloseButtonMargins</span>:0 - Margins for the next, previous and close buttons.</li>
+			<li><span class="boldLi">borderColor</span>:"#333333" - the border color of the main windows.</li>
+			<li><span class="boldLi">mainLabelsColor</span>:"#FFFFFF" - the color for the main labels.</li>
+			<li><span class="boldLi">secondaryLabelsColor</span>:"#a1a1a1" - the color for the secondary labels.</li>
+			<li><span class="boldLi">shareAndEmbedTextColor</span>:"#5a5a5a" - the color for the share and embed text.</li>
+			<li><span class="boldLi">inputBackgroundColor</span>:"#000000" - the background color for the input texts.</li>
+			<li><span class="boldLi">inputColor</span>:"#000000" - the color for the input texts.</li>
+		</ul>
+		<img src="assets/images/embedWindow.jpg"></img>
+		
+		//-- playback rate / speed --//
+		<ul>
+			<li><span class="boldLi">defaultPlaybackRate</span>:1 - the playback speed  / rate, valuse accepted are 0.25, 0.5, 1, 1.25, 1.5, 2, higher then on is faster and lower then 1 is slower.</li>
+		</ul>
+		
+		//-- cuepoints --//
+		<ul>
+			<li><span class="boldLi">executeCuepointsOnlyOnce</span>:"no" - This option can be yes or no. If you want to execute the cuepoint only once set this feature to yes othewise set it to no.</li>
+		</ul>
+		
+		//-- ads --//
+		<ul>
+			<li><span class="boldLi">openNewPageAtTheEndOfTheAds</span>:"no" - If this is set to yes when the ad video has finished to play a new web page will open with the url specified in the item playlist markup.</li>
+			<li><span class="boldLi">playAdsOnlyOnce</span>:"no" - this can be yes or no, if set to yes after an ad video has played it will not play again if the same video is selected from the playlist.</li>
+			<li><span class="boldLi">adsButtonsPosition</span>:"right" - this can be left or right and represents the ads info and button position over the video.</li>
+			<li><span class="boldLi">skipToVideoText</span>:"You can skip to video in: " - the text that will appear in the skip info screen.</li>
+			<li><span class="boldLi">skipToVideoButtonText</span>:"Skip Ad " - the text that will appear in the ads skip button.</li>
+			<li><span class="boldLi">adsTextNormalColor</span>:"#777777" - the normal color for the text for both ads skip info screen and ads skip button.</li><li><span class="boldLi">adsTextSelectedColor</span>:"#FFFFFF" - the selected color for the text for both ads skip info screen and ads skip button.</li>
+			<li><span class="boldLi">adsBorderNormalColor</span>:"#444444" - the normal color for the border for both ads skip info screen and ads skip button.</li>
+			<li><span class="boldLi">adsBorderSelectedColor</span>:"#FFFFFF" - the selected color for the border for both ads skip info screen and ads skip button.</li>
+		</ul>
+		
+		
+		//-- a to b loop --//
+		<ul>
+			<li><span class="boldLi">useAToB</span>:"yes" - this can be yes or no. Enable the a to b loop, please make sure you set this option to yes if you want to use this feature.</li>
+			<li><span class="boldLi">atbTimeBackgroundColor</span>:"transparent" - the a to b loop time background color.</li>
+			<li><span class="boldLi">atbTimeTextColorNormal</span>:"#888888" - the a to b loop time text normal color.</li>	
+			<li><span class="boldLi">atbTimeTextColorSelected</span>:"#000000" - the a to b loop time text selected color.</li>		
+			<li><span class="boldLi">atbButtonTextNormalColor</span>:"#888888" - the a to b loop a and b buttons text normal color.</li>	
+			<li><span class="boldLi">atbButtonTextSelectedColor</span>:"#FFFFFF" - the a to b loop a and b buttons text selected color.</li>	
+			<li><span class="boldLi">atbButtonBackgroundNormalColor</span>:"#888888" - the a to b loop a and b buttons background normal color.</li>	
+			<li><span class="boldLi">atbButtonBackgroundSelectedColor</span>:"#000000" - the a to b loop a and b buttons background selected color.</li>		
+		</ul>
+		
+		
+		//-- context menu --//
+		<ul>
+			<li><span class="boldLi">showContextmenu</span>:"yes" - this can be yes or no. Shows or not the right click context menu.</li>
+			<li><span class="boldLi">showScriptDeveloper</span>:"no" - this can be yes or no. If you like to support this plugin pelase set this to yes.</li>
+			<li><span class="boldLi">contextMenuBackgroundColor</span>:"#1f1f1f" - context menu background color.</li>	
+			<li><span class="boldLi">contextMenuBorderColor</span>:"#1f1f1f" - context menu border color.</li>
+			<li><span class="boldLi">contextMenuItemNormalColor</span>:"#1f1f1f" - context menu text normal color.</li>
+			<li><span class="boldLi">contextMenuItemSelectedColor</span>:"#FFFFFF" - context menu text selected color.</li>
+			<li><span class="boldLi">contextMenuItemDisabledColor</span>:"#1f1f1f" - context menu text disabled color.</li>
+		</ul>
+		
+	
+		<br>
+		<br>
+		<br>
+		
+		<h3 id="cat"><strong>E) Setup playlists.</strong> - <a href="#toc">top</a></h3>
+		<p>Open with a text editor one of the html files from the start folder.</p>
+
+		<p>Setting up the playlists window is simple, an <span class="boldLi">ul</span> tag must be added in the body tag, this
+		<span class="boldLi">ul</span> tag must have an unique id that is passed as a value to the UVP constructor as follows <span class="boldLi">playlistsId</span>"unique-id", in the examples provided the id is "playlists" but it can be have any value as long as it is unique.</p>
+
+		<p>To add/remove a playlist  an <span class="boldLi">li</span> tags must be added/removed inside the playlists <span class="boldLi">ul</span> tag, this is illustrated in the below code. The Ultimate Video Player supports unlimited playlists but at least one playlist is required!.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+			<ul id="playlists" style="display:none;">
+				<li data-source="playlist1" data-playlist-name="MY HTML PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-html.jpg">
+					<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My HTML playlist 1</span></p>
+					<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>HTML</p>
+					<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using <strong>HTML markup</strong>, all format are supported and it can have mixed video formats.</p>
+				</li>
+				
+				<li data-source="list=PLxKHVMqMZqUQFbRO0VWaHMaWuQagIgpJe"  data-playlist-name="MY YOUTUBE PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-youtube.jpg">
+					<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My Youtube playlist 1</span></p>
+					<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>YOUTUBE</p>
+					<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created by loading a Youtube playlist, video are loaded and played from Youtube.</p>
+				</li>
+				
+				<li data-source="mixedPlaylist" data-playlist-name="MY MIXED PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-mixed.jpg">
+					<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My mixed playlist 1</span></p>
+					<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>MIXED</p>
+					<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using <strong>HTML markup</strong>, videos are played self or external hosted. or Youtube.</p>
+				</li>
+				
+				<li data-source="https://www.webdesign-flash.ro/p/uvp/content/playlist.xml" data-playlist-name="MY XML PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-xml.jpg">
+					<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My XML playlist 1</span></p>
+					<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>XML</p>
+					<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using a XML file, videos are played self or external hosted. or Youtube.</p>
+				</li>
+				
+				<li data-source="vimeoPlaylist" data-playlist-name="VIMEO PLAYLIST" data-thumbnail-path="content/thumbnails/p-vimeo.jpg">
+					<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">MY VIMEO PLAYLIST 1</span></p>
+					<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>VIMEO</p>
+					<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using <strong>HTML markup</strong>, video are loaded and played from Vimeo.</p>
+				</li>
+				
+				<li data-source="folder=videos" data-playlist-name="MY MP4 FOLDER PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-folder.jpg">
+					<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My mp4 folder playlist 1</span></p>
+					<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>FOLDER</p>
+					<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using a folder with mp4 files, all format are supported and it can have mixed video formats.</p>
+				</li>
+				
+				<li data-source="folder=mp3" data-playlist-name="MY MP3 FOLDER PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-folder.jpg">
+					<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My mp3 folder playlist 1</span></p>
+					<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>FOLDER</p>
+					<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using a folder with mp3 files, mp3 files are loaded and played from the server.</p>
+				</li>
+			</ul></pre>
+		<br>	
+		<p>To create a private playlist add the attribute  <span class="boldLi">data-password</span> inside the playlist tag and set the password using the encryption tool <a href="http://webdesign-flash.ro/ps/" target="_blank">here</a>, example below.</p> 
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-source="playlist1" data-playlist-name="MY HTML PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-html.jpg" data-password="d2104a400c7f629a197f33bb33fe80c0">>
+			<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My HTML playlist 1</span></p>
+			<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>HTML</p>
+			<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using <strong>HTML markup</strong>, all format are supported and it can have mixed video formats.</p>
+		</li>
+		</pre>
+		
+		<p>Theree are four playlist type as follow: <span class="boldLi">HTML, YOUTUBE, XML and folder</span>. Each of this type of playlists are explained in detail below, please note that this playlist can contain both mp4 and youtube video files this way a mixed playlist can be created.</p>
+		
+		<h3>HTML playlist.</h3>
+		<p>To add/remove this type of playlist in the playlists add or remove the code illustrated below into the playlists <span class="boldLi">ul</span> tag.The <span class="boldLi">data-source</span> represents the id of the playlist <span class="boldLi">ul</span> element. The other attributes are self explanatory.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-source="mixedPlaylist" data-playlist-name="My MIXED PLAYLIST" data-thumbnail-path="content/thumbnails/large3.jpg" data-password="d2104a400c7f629a197f33bb33fe80c0">
+			<p class="minimalDarkCategoriesTitle"><span class="minimialDarkBold">Title: </span>My playlist 3</p>
+			<p class="fwduvp-dark-categories-type"><span class="minimialDarkBold">Type: </span>MIXED</p>
+			<p class="fwduvp-dark-categories-description"><span class="minimialDarkBold">Description: </span>Created using HTML elements, videos are loaded and played from the server or Youtube.</p>
+		</li>
+		</pre>
+		<p>To construct this type of playlist add the code from the below image inside the body HTML element. The code sample is self explanatory. To add/remove videos add/remove <span class="boldLi">li</span>  HTML elements with the <span class="boldLi">data-thumb-source</span> attribute. There is an optional parameter called data-scrub-at-time-at-first-play, this allows to scrub te video at a specified time the first time the video plays so for example to scrub the video at minute 01 at first play set this attribute to data-scrub-at-time-at-first-play="00:01:00", the format time is "hours:minutes:seconds". Please note that you can set multiple video sources by passing an object of videos like showed in the below example to the <span class="boldLi">data-video-source</span> you can also pass the video source directly without an object form like this <span class="boldLi">data-video-source="content/videos2/fwd-480p.mp4"</span></p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<ul id="mixedPlaylist" style="display:none;">
+			<li data-thumb-source="content/thumbnails/small-fwd.jpg" data-video-source="[{source:'content/videos2/fwd-480p.mp4', label:'small version'}, {source:'content/videos2/fwd-720p.mp4', label:'hd720'},{source:'content/videos2/fwd-1080p.mp4', label:'hd1080'}]" data-start-at-video="2" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-subtitle-soruce="[{source:'content/subtitles/english_subtitle.vtt', label:'English'}, {source:'content/subtitles/romanian_subtitle.vtt', label:'Romanian'},{source:'content/subtitles/spanish_subtitle.vtt', label:'Spanish'}]"  data-start-at-subtitle="1" data-downloadable="no">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">MP4 video support</p>
+						<p class="fwduvp-thumbnail-description">Support for self-hosted or external mp4 video files.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">MP4 video support</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all video.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+			
+			<li data-thumb-source="content/thumbnails/small-lora.jpg" data-video-source="https://www.youtube.com/watch?v=IDZTCLNOfqU" data-poster-source="content/posters/Youtube-poster.jpg,content/posters/Youtube-poster-mobile.jpg" data-downloadable="no">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">Youtube video</p>
+						<p class="fwduvp-thumbnail-description">Support for Youtube videos, this video is not part of a Youtube playlist.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">Youtube single videos</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all video.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+			
+			<li data-thumb-source="content/thumbnails/v1.jpg" data-video-source="https://vimeo.com/channels/top/62092214" data-poster-source="content/posters/vimeo-poster.jpg,content/posters/vimeo-poster-mobile.jpg">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">Vimeo video</p>
+						<p class="fwduvp-thumbnail-description">Support for Vimeo videos, this video is not part of a Vimeo playlist.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">Vimeo video</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all video.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+			
+			<li data-thumb-source="content/thumbnails/audio-thumbnail.jpg" data-video-source="content/mp3/01.mp3" data-poster-source="content/posters/audio-poster.jpg" data-downloadable="no">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">Mp3 Audio</p>
+						<p class="fwduvp-thumbnail-description">UVP can play mp3 files and visualize it in real time.</p>
+					</div>	
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">Mp3 Audio</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all video.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/p/megazoom/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</ul>
+		</pre>
+		<br>
+		<h3>YOUTUBE playlist.</h3>
+		<p>To add/remove this type of playlist add or remove the code illustrated below into the playlists <span class="boldLi">ul</span> tag.The <span class="boldLi">data-source</span> represents the youtube playlist id. The other attributes are self explanatory.</p>
+		<p>Please note that an API youtube key has to be created and used, for more information please watch <a href="https://www.youtube.com/watch?v=whcjAjftBL0&feature=youtu.be" target="_blank">this video tutorial</a>
+		<p>When adding the youtube plauylist id <span class="boldLi">data-source</span> attribute a special string must be added before it, this string value is <span class="boldLi">list=</span>, so for example if youtube playlist id is <span class="boldLi">289858</span> the final string must look like this <span class="boldLi">list=289858</span>.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-source="list=PLxKHVMqMZqUQFbRO0VWaHMaWuQagIgpJe"  data-playlist-name="MY YOUTUBE PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-youtube.jpg">
+			<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My Youtube playlist 1</span></p>
+			<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>YOUTUBE</p>
+			<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created by loading a Youtube playlist, video are loaded and played from Youtube.</p>
+		</li>
+		</pre>
+		<br><br>
+		<h3>XML playlist.</h3>
+		<p>To add/remove this type of playlist in the playlists add or remove the code illustrated below into the playlists <span class="boldLi">ul</span> tag. The <span class="boldLi">data-source</span> represents the path of the XML file. Please note that the XML path must be absolute, ex: http://www.domain.com/xmlFile.xml. The other attributes are self explanatory. Please note that the XML file does not allow special characters like "&", if you need to use this type of character numeric characters are required, a useful table with all this special characters can be found  <a href="http://www.dvteclipse.com/documentation/svlinter/How_to_use_special_characters_in_XML.3F.html" target="_blank">at this url</a>.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-source="https://www.webdesign-flash.ro/p/uvp/content/playlist.xml" data-playlist-name="MY XML PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-xml.jpg">
+			<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My XML playlist 1</span></p>
+			<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>XML</p>
+			<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using a XML file, videos are played self or external hosted. or Youtube.</p>
+		</li>
+		</pre>
+		<br><br>
+		<h3>FOLDER playlist.</h3>
+		<p>To add/remove this type of playlist add or remove the code illustrated below into the playlists <span class="boldLi">ul</span> tag. The <span class="boldLi">data-source</span> represents path of the mp4's folder (please note that this type of playlist can only be loaded from the same domain on which the html page resides, also the folder path must be relative to the path of the "proxyFolder.php", what this means is that your mp4's folder must be in the same folder or subfolder with the "proxyFolder.php" file in the content folder). The other attributes are self explanatory. To add thumbnails create an image with the same name as the mp4 file and add <span class="boldLi">-thumbnail</span> after it like this <span class="boldLi">myMp4Video-thumbnail</span>, for example if the video is called <span class="boldLi">myVideo.mp4</span> the thumbnail should be <span class="boldLi">myVideo-thumbnail.jpg</span>, the same applies if you want a poster for the video but the poster image has to have the name isnted of -thumbnail.jpg set to -poster.jpg.</p>
+		<p>When adding the folder path to the <span class="boldLi">data-source</span> attribute a special string must be added before it, this string value is <span class="boldLi">folder=</span>, so for example if the mp4's folder path is <span class="boldLi">myFolder</span> the final string must look like this <span class="boldLi">folder=myFolder</span>. For a folder with a mp4's subfolder ex: <span class="boldLi">myFolder/myMp4Folder</span> the final string must look like this <span class="boldLi">folder=myFolder/myMp3Folder</span>. Try not to use special characters in your video names, it is possible that the script will ignore them if they have heavy names with special characters or white spaces.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-source="folder=videos" data-playlist-name="MY MP4 FOLDER PLAYLIST 1" data-thumbnail-path="content/thumbnails/p-folder.jpg">
+			<p class="fwduvp-categories-title"><span class="fwduvp-header">Title: </span><span class="fwduvp-title">My mp4 folder playlist 1</span></p>
+			<p class="fwduvp-categories-type"><span class="fwduvp-header">Type: </span>FOLDER</p>
+			<p class="fwduvp-categories-description"><span class="fwduvp-header">Description: </span>Created using a folder with mp4 files, all format are supported and it can have mixed video formats.</p>
+		</li>
+		</pre>
+		<br><br>
+		<h3>Vimeo album / playlist.</h3>
+		<p>To add/remove this type of playlist add or remove the code illustrated below into the playlists <span class="boldLi">ul</span> tag. The <span class="boldLi">data-source</span> represents the vimeo album URL, the <span class="boldLi">data-user-id</span> represents the vimeo user id.</p>
+		<p>Because this section is a bit complicated I decided to create a video tutorial, please <a href="https://www.youtube.com/watch?v=8Xku0m2d_bY&feature=youtu.be" target="_blank">watch it here</a></p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-source="https://vimeo.com/manage/albums/5913812" data-user-id="44212356" data-playlist-name="MY VIMEO ALBUM" data-thumbnail-path="content/thumbnails/large5.jpg">
+			<p class="minimalDarkCategoriesTitle"><span class="minimialDarkBold">Title: </span>My vimeo album 1</p>
+			<p class="fwduvp-dark-categories-type"><span class="minimialDarkBold">Type: </span>VIMEO ALBUM</p>
+			<p class="fwduvp-dark-categories-description"><span class="minimialDarkBold">Description: </span>Created using a Vimeo album URI.</p>
+		</li>
+		</pre>
+		<br>
+		<br>
+		
+		<h3 id="source"><strong>F) Setup video, ads (pre-roll / mid-roll / post-roll), subtitles, hls, 360 video and poster source.</strong> - <a href="#toc">top</a></h3>
+		
+		<p>The Ultimate Video Player can play mp4 videos from your server, a different server, from youtube or vimeo. If you are using relative source paths for your videos make sure that all of them are situated inside the content folder, this is really important in order for the player to function correctly, </p>
+		<p>If you are using a HTML or XML playlist to play a video from your server set the <span class="boldLi">data-video-source</span> attribute to point to the mp4 video path, relative or absolute paths can be used, also UVP can be set to play a source for desktop machines and a source for mobile devices, this is done by separating the sources with ",". Please note that the mobile source is optional if you want a single source for all situations set a single source. Don't leave any white spaces after the  "," separators!. (<font color="#FF0000"> the same rules apply to the video poster source with once exception, if you don't need a poster set data-poster-source="none"</font>). Also it is possible to add multiple sources for videos as illustrated below and switch between them using the video quality selector.</p>
+	
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-thumb-source="content/thumbnails/small-fwd.jpg" data-video-source="[{source:'content/videos2/fwd-480p.mp4', label:'small version'}, {source:'content/videos2/fwd-720p.mp4', label:'hd720'},{source:'content/videos2/fwd-1080p.mp4', label:'hd1080'}]" data-start-at-video="2" data-poster-source="content/posters/mp4-poster.jpg" data-subtitle-soruce="[{source:'content/subtitles/english_subtitle.vtt', label:'English'}, {source:'content/subtitles/romanian_subtitle.vtt', label:'Romanian'},{source:'content/subtitles/spanish_subtitle.vtt', label:'Spanish'}]"  data-start-at-subtitle="1" data-downloadable="yes">	
+		<div data-video-short-description="">
+				<div>
+					<p class="fwduvp-thumbnail-title">Multiple Subtitles & Video Quality</p>
+					<p class="fwduvp-thumbnail-description">Each video can have one or more subtitles (txt or srt).</p>
+				</div>
+			</div>
+		</li>
+		</pre>
+		<p>To add one or more advertisement (pre-roll/mid-roll/post-roll) video an ul element with the data attribute data-ads has to be added inside the video data li element, this is better explained below. Please note that an advertisement video can be set to play a source for desktop machines and a source for mobile devices, this is done by separating the sources with ",". Please note that the mobile source is optional if you want a single source for all situations set a single source. The global ads settings are set in the constructor, for more information about this please read the <a href="#config">constructor parameters</a> in the ads subsection. </p>
+		
+		<p>Inside the element with the data-ads attribute the ads are added in li elements, you can add as many as you like by stacking them one after eachother. Each element contains the ads data as follows :<br><br><span class="boldLi">data-source</span> - the ad source, it can be a mp4 video path, an image path or a youtube video url.<br><span class="boldLi">data-time-start</span> - the ad start time when it will appear in hours:minutes:seconds format.<br><span class="boldLi">data-time-to-hold-ads</span> - the ad time until the skip button will appear in seconds format. If you don't want the skip button to appear just set this to 0 ex: <span class="boldLi">data-time-to-hold-ads="0"</span>.<br><span class="boldLi">data-thumbnailSource</span> - optional tumbnail source that will appear as a small preview in the skip button.<br><span class="boldLi">data-link</span> - the link to open when the ad is clicked.<br><span class="boldLi">data-target</span> - the link target (_blank or _self).<br><span class="boldLi">data-add-duration</span> - this is optional if the ad is an image and it represents the time to hold the image ad in in hours:minutes:seconds format.</p>
+
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-thumb-source="content/thumbnails/small-fwd.jpg" data-video-source="[{source:'content/videos2/fwd-480p.mp4', label:'small version'}, {source:'content/videos2/fwd-720p.mp4', label:'hd720'},{source:'content/videos2/fwd-1080p.mp4', label:'hd1080'}]" data-start-at-video="2" data-poster-source="content/posters/mp4-poster.jpg" data-subtitle-soruce="[{source:'content/subtitles/english_subtitle.vtt', label:'English'}, {source:'content/subtitles/romanian_subtitle.vtt', label:'Romanian'},{source:'content/subtitles/spanish_subtitle.vtt', label:'Spanish'}]"  data-start-at-subtitle="1" data-downloadable="yes">
+			<ul data-ads="">
+				<li data-source="content/videos/ad.mp4" data-time-start="00:00:15" data-time-to-hold-ads=4 data-thumbnail-source="content/images/thumbnail.jpg" data-link="http://www.webdesign-flash.ro" data-target="_blank"></li>
+				<li data-source="https://www.youtube.com/watch?v=8EJ3zbKTWQ8" data-time-start="00:00:32" data-time-to-hold-ads=4 data-thumbnail-source="content/images/thumbnail.jpg" data-link="http://www.webdesign-flash.ro" data-target="_blank"></li>
+				<li data-source="content/images/ad.jpg" data-time-start="00:00:45" data-time-to-hold-ads=4 data-add-duration="00:00:15" data-thumbnail-source="" data-link="http://www.webdesign-flash.ro/p/evp/content/images/ad.jpg" data-target="_blank"></li>
+			</ul>
+			<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">Multiple Subtitles & Video Quality</p>
+						<p class="fwduvp-thumbnail-description">Each video can have one or more subtitles (txt or srt).</p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		
+			
+		<p>To play a video from youtube set the <span class="boldLi">videoSource</span> property to point to the youtube video id, this is illustrated below. Is important to note that a youtube video id is always constructed from 11 characters.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-thumb-source="content/thumbnails/small-lora.jpg" data-video-source="oIHyVibVwVA" data-poster-source="content/posters/youtube-poster.jpg,content/posters/youtube-poster-mobile.jpg" data-downloadable="no">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">LORA PUISOR</p>
+						<p class="fwduvp-thumbnail-description">Each video can contain a short description, the description can be formatted with CSS as you like.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">LORA - PUISOR</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		<p></p>
+		
+		<p>To play a video from vimeo set the <span class="boldLi">videoSource</span> property to point to the vimeo video url, this is illustrated below.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-thumb-source="content/thumbnails/small-u3dcar.jpg" data-video-source="http://184.72.239.149/vod/smil:BigBuckBunny.smil/playlist.m3u8" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-downloadable="yes">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">HLS / LIVE STREAMING / m3u8 EXAMPLE</p>
+						<p class="fwduvp-thumbnail-title">HTTP Live Streaming</span> /<span class="myBold"> HLS</span> / <span class="myBold">m3u8</span> video support on all browsers.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">HLS / LIVE STREAMING / m3u8 EXAMPLE</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/p/u3dcar/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		<p></p>
+		
+		<p>To play a 360 degree / VR video set the <span class="boldLi">videoSource</span> property to point to the video url and add an extra parameter that will enable this feature for this video <span class="boldLi">data-is360="yes"</span>, this is illustrated below.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-thumb-source="content/thumbnails/small-360.jpg" data-video-source="[{source:'content/videos/360.mp4', label:'', is360:'yes'}]" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-downloadable="yes">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">360 DEGREE VR VIDEO EXAMPLE</p>
+						<p class="fwduvp-thumbnail-title">Virtual reality 360 degree / VR support.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">360 DEGREE VR VIDEO EXAMPLE</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/p/360viewer/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		<p></p>
+		
+		<p>To play a HLS / live streming / m3u8 video set the <span class="boldLi">videoSource</span> property to point to the video url, this is illustrated below.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-thumb-source="content/thumbnails/small-u3dcar.jpg" data-video-source="http://184.72.239.149/vod/smil:BigBuckBunny.smil/playlist.m3u8" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-downloadable="yes">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">HLS / LIVE STREAMING / m3u8 EXAMPLE</p>
+						<p class="fwduvp-thumbnail-title">HTTP Live Streaming</span> /<span class="myBold"> HLS</span> / <span class="myBold">m3u8</span> video support on all browsers.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">HLS / LIVE STREAMING / m3u8 EXAMPLE</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/p/u3dcar/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		<p></p>
+		
+		<p>To play a audio / mp3 file set the <span class="boldLi">videoSource</span> property to point to the mp3 file relative or absolute path, this is illustrated below.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-thumb-source="content/thumbnails/small-lora.jpg" data-video-source="content/mp3/01.mp3" data-poster-source="content/posters/youtube-poster.jpg,content/posters/youtube-poster-mobile.jpg" data-downloadable="no">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">LORA PUISOR</p>
+						<p class="fwduvp-thumbnail-title">Each video can contain a short description, the description can be formatted with CSS as you like.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">LORA - PUISOR</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		<p></p>
+		
+		<p>To add a subtitle set the data-subtitle-soruce tag for the video to point to the subtitle path or a subtitle object as illustrated below, multiple subtitles cane be added and changed via the subtitle selector, if only one subtitle is added then the subtitle selector will be disabled. The subtitle format can be .txt. or .srt. The format is of .srt type, and there is included one subtitle for reference this way more can be created from a template. How to add a subtitle for a video is illustrated below.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML5'">
+		<li data-thumb-source="content/thumbnails/small-fwd.jpg" data-video-source="content/videos/fwd.mp4,content/videos/fwd-mobile.mp4" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-subtitle-soruce="content/subtitle.txt" data-downloadable="yes">	<div data-video-short-description="">
+						<div>
+							<p class="fwduvp-thumbnail-title">VIDEO TITLE</p>
+							<p class="fwduvp-thumbnail-title">Each video can contain a short description, the description can be formatted with CSS as you like.</p>
+						</div>
+					</div>
+					<div data-video-long-description="">
+						<div>
+							<p class="fwduvp-video-title">VIDEO TITLE</p>
+							<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+							<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/" target="_blank">this link</a></p>
+						</div>
+					</div>
+				</li>
+		</pre>
+		<p></p>
+		
+		
+		<h3 id="share"><strong>G) Setup pop-up image ads and google adsense pop-up ads.</strong> - <a href="#toc">top</a></h3>
+		<p>To add pop-up ads image window or windows can be added with ease, some HTML code has to be added inside the <span class="boldLi">li</span> element that contains the video, the example below will show better what I mean by that. Below you can see that there is a div with an attribute data-add-popup, that is what must be added  and inside of it there are other parameters that are explained below.  </p>
+		<h3>Parameters:</h3>
+		<ol> 
+			<li><span class="boldLi">data-image-path</span> - the popup ad image path (.jpg, .jpeg, .png).</li>
+			<li><span class="boldLi">data-time-start</span> - the time when the ad will be showed in hh:mm:ss hours.</li>
+			<li><span class="boldLi">data-time-end</span> - the time when the ad will be hidden in hh:mm:ss hours.</li>
+			<li><span class="boldLi">data-link</span> - the URL of the page to open when the ad is clicked, if you don't want to open a page when the ad is clicked just leave this option blank.</li>
+			<li><span class="boldLi">data-target</span> - the page to open target (_blank, _self, _parent).</li>
+		</ol>
+
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+		<li data-thumb-source="content/thumbnails/small-fwd.jpg" data-video-source="content/videos/fwd.mp4,content/videos/fwd-mobile.mp4" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-subtitle-soruce="content/subtitle.txt" data-downloadable="yes">	<div data-video-short-description="">
+				<div>
+					<p class="fwduvp-thumbnail-title">VIDEO TITLE</p>
+					<p class="fwduvp-thumbnail-title">Each video can contain a short description, the description can be formatted with CSS as you like.</p>
+				</div>
+			</div>
+			<div data-add-popup="">
+				<p data-image-path="content/images/img.jpg" data-time-start="00:00:01" data-time-end="00:00:25" data-link="http://www.webdesign-flash.ro" data-target="_blank"></p>
+				<p data-image-path="content/images/img2.jpg" data-time-start="00:00:31" data-time-end="00:00:52" data-link="http://www.google.com" data-target="_blank"></p>
+			</div>
+		</li></pre>
+		
+		<p>To add pop-up google adsense window or windows, some HTML code has to be added inside the <span class="boldLi">li</span> element that contains the video, the example below will show better what I mean by that. Below you can see that there is a div with an attribute data-add-popup, that is what must be added and inside of it there are other parameters that are explained below.  </p>
+		<h3>Parameters:</h3>
+		<ol> 
+			<li><span class="boldLi">data-google-ad-client</span> - the google adsense ad client.</li>
+			<li><span class="boldLi">data-google-ad-slot</span> - the google adsense ad slot.</li>
+			<li><span class="boldLi">data-google-ad-width</span> - the ad window width in px.</li>
+			<li><span class="boldLi">data-google-ad-height</span> - the ad window height in px.</li>
+			<li><span class="boldLi">data-time-start</span> - the time when the ad will be showed in hh:mm:ss hours.</li>
+			<li><span class="boldLi">data-time-end</span> - the time when the ad will be hidden in hh:mm:ss hours.</li>
+		</ol>
+		
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+		<li data-thumb-source="content/thumbnails/small-fwd.jpg" data-video-source="content/videos/fwd.mp4,content/videos/fwd-mobile.mp4" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-subtitle-soruce="content/subtitle.txt" data-downloadable="yes">	<div data-video-short-description="">
+				<div>
+					<p class="fwduvp-thumbnail-title">VIDEO TITLE</p>
+					<p class="fwduvp-thumbnail-title">Each video can contain a short description, the description can be formatted with CSS as you like.</p>
+				</div>
+			</div>
+			<div data-add-popup="">
+				<p data-google-ad-client="ca-pub-9227170916808685" data-google-ad-slot="7711195609" data-google-ad-width=400 data-google-ad-height=100 data-time-start="00:00:21" data-time-end="00:00:30"></p>
+				<p data-google-ad-client="ca-pub-9227170916808685" data-google-ad-slot="7711195609" data-google-ad-width=400 data-google-ad-height=300 data-time-start="00:00:31" data-time-end="00:00:40"></p>
+			</div>
+		</li></pre>
+		<p>Please note that the image and adsense popup ads can be combined. Please see below</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+		<div data-add-popup="">
+			<p data-image-path="content/images/img.jpg" data-time-start="00:00:01" data-time-end="00:00:10" data-link="http://www.webdesign-flash.ro" data-target="_blank"></p>
+			<p data-image-path="content/images/img2.jpg" data-time-start="00:00:11" data-time-end="00:00:20" data-link="http://www.google.com" data-target="_blank"></p>
+			<p data-google-ad-client="ca-pub-9227170916808685" data-google-ad-slot="7711195609" data-google-ad-width=400 data-google-ad-height=100 data-time-start="00:00:21" data-time-end="00:00:30"></p>
+			<p data-google-ad-client="ca-pub-9227170916808685" data-google-ad-slot="7711195609" data-google-ad-width=400 data-google-ad-height=300 data-time-start="00:00:31" data-time-end="00:00:40"></p>
+		</div>
+		</pre>
+		<br><br>
+		<h3 id="cue"><strong>H) Setup cuepoints.</strong> - <a href="#toc">top</a></h3>
+		<p>To add cuepoints, some HTML code has to be added inside the li element that contains the video, the example below will show better what I mean by that. Below you can see that there is a ul with an attribute data-cuepoints, that is what must be added  and inside of it there are other parameters that are self explanatory, you can add one or as many as you like.</p>
+
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+		<li data-thumb-source="content/thumbnails/small-fwd.jpg" data-video-source="content/videos/fwd.mp4,content/videos/fwd-mobile.mp4" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-subtitle-soruce="content/subtitle.txt" data-downloadable="yes">	<div data-video-short-description="">
+				<div>
+					<p class="fwduvp-thumbnail-title">VIDEO TITLE</p>
+					<p class="fwduvp-thumbnail-title">Each video can contain a short description, the description can be formatted with CSS as you like.</p>
+				</div>
+			</div>
+			<div data-video-long-description="">
+				<div>
+					<p class="fwduvp-video-title">VIDEO TITLE</p>
+					<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+					<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/" target="_blank">this link</a></p>
+				</div>
+			</div>
+			<ul data-cuepoints="">
+				<li data-time-start="00:00:10" data-javascript-call="alert('cuepoint called at time: 00:00:10');"></li>
+				<li data-time-start="00:00:20" data-javascript-call="fuctionName();"></li>
+			</ul>
+		</li></pre>
+		
+		<br><br><br>
+		<h3 id="api"><strong>I) API.</strong> - <a href="#toc">top</a></h3>
+		<p>Inside the donwload files there is HTML file called API-example.html, in this file I have added all events and methods for reference, open the page source to see them. Full reference below. Please note that the properties are read only and they can only be written in the consturctor for more info about this please read the <a href="#config">Constructor parameters</a> section.</p>
+		
+
+		<p CLASS="largeLabel1">API - public methods:</p>
+			<table>
+				  <tr class="firstTr">
+					<th class="fistTd">Function</td>
+					<th class="secondTd">Method</td>
+					<th class="thirdTd">Description</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">downloadVideo</p></td>
+					<td class="prop"><span class="inlineSpan">downloadVideo(pId:Number)</span>:String</td>
+					<td class="lastCol">Download video based on id.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">getVideoSource</p></td>
+					<td class="prop"><span class="inlineSpan">getVideoSource()</span>:String</td>
+					<td class="lastCol">Return the video source path if the video is from the server or youtube id if the video is playing from youtube.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">getPosterSource</p></td>
+					<td class="prop"><span class="inlineSpan">getPosterSource()</span>:String</td>
+					<td class="lastCol">Return the poster source.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">getCurrentTime</p></td>
+					<td class="prop"><span class="inlineSpan">getCurrentTime(format:String)</span>:String</td>
+					<td class="lastCol">Return the current time source. The format parameter can be text(hh:mm:ss) or seconds.</td>
+				  </tr>
+				   <tr>
+					<td><p class="mainProp">getTotalTime</p></td>
+					<td class="prop"><span class="inlineSpan">getTotalTime(format:String)</span>:String</td>
+					<td class="lastCol">Return the video total time / duration. The format parameter can be text(hh:mm:ss) or seconds.</td></td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">goFullScreen</p></td>
+					<td class="prop"><span class="inlineSpan">goFullScreen()</span>:void</td>
+					<td class="lastCol">Set video player to fullscreen.</td>
+				  </tr>
+				 <tr>
+					<td><p class="mainProp">play</p></td>
+					<td class="prop"><span class="inlineSpan">play()</span>:void</td>
+					<td class="lastCol">Start / play playback.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playVideo</p></td>
+					<td class="prop"><span class="inlineSpan">playVideo(videoId)</span>:void</td>
+					<td class="lastCol">Play a video based on the videoId, the count is starting from 0.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playNext</p></td>
+					<td class="prop"><span class="inlineSpan">playNext()</span>:void</td>
+					<td class="lastCol">Start / play next video.</td>
+				  </tr>
+				   <tr>
+					<td><p class="mainProp">playPrev</p></td>
+					<td class="prop"><span class="inlineSpan">playPrev()</span>:void</td>
+					<td class="lastCol">Start / play previous video.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playShuffle</p></td>
+					<td class="prop"><span class="inlineSpan">playShuffle()</span>:void</td>
+					<td class="lastCol">Start / play shuffle video.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">pause</p></td>
+					<td class="prop"><span class="inlineSpan">pause()</span>:void</td>
+					<td class="lastCol">Pause the playback.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">setVideoSource</p></td>
+					<td class="prop"><span class="inlineSpan">setVideoSource(videoSource:String)</span>:void</td>
+					<td class="lastCol">Set the video source path or youtube video id. Please read the <a href="#source">Setup video, ads (pre-roll / mid-roll / post-roll), subtitles, hls, 360 video and poster source</a>.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">setThumbnailPreviewSource</p></td>
+					<td class="prop"><span class="inlineSpan">setThumbnailPreviewSource(source:String)</span>:void</td>
+					<td class="lastCol">Set the video thumbnails preview source, this source has to be a .vtt file, please read <a href="#thumbnails_preview">Thumbnails preview</a>.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">loadPlaylist</p></td>
+					<td class="prop"><span class="inlineSpan">loadPlaylist(playlistId:int)</span>:void</td>
+					<td class="lastCol">Load a playlist base on id, the counting starts from 0.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">setPosterSource</p></td>
+					<td class="prop"><span class="inlineSpan">setPosterSource(posterSource:String)</span>:void</td>
+					<td class="lastCol">Set the poster source path. Please read the <a href="#source">Setup video, ads (pre-roll / mid-roll / post-roll), subtitles, hls, 360 video and poster source</a>.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">share</p></td>
+					<td class="prop"><span class="inlineSpan">share()</span>:void</td>
+					<td class="lastCol">Share current track on facebook.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">setVolume</p></td>
+					<td  class="prop"><span class="inlineSpan">setVolume( Number )</span>:void</td>
+					<td class="lastCol">Set the video volume, this method accepts a parameter that represents a number between 0 (video mute state) and 1 (video maximum volume).</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">scrub</p></td>
+					<td class="prop"><span class="inlineSpan">scrub( Number )</span>:void</td>
+					<td class="lastCol">Notify instance to scrub (set the video position), this method accepts a parameter that represents a number between 0 (video start position) and 1 (video end position).</td>
+				  </tr>
+				   <tr>
+					<td><p class="mainProp">scrubbAtTime</p></td>
+					<td class="prop"><span class="inlineSpan">scrubbAtTime(time:String)</span>:void</td>
+					<td class="lastCol">Notify instance to scrub at a specified time, the time argument has to be in hours:minutes:seconds format ex:00:01:20.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">stop</p></td>
+					<td class="prop"><span class="inlineSpan">stop()</span>:void</td>
+					<td class="lastCol">Stops the playback and the loading process if the loading process has started.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">showCategories</p></td>
+					<td class="prop"><span class="inlineSpan">showCategories()</span>:void</td>
+					<td class="lastCol">Show the categories windows.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">hidePlayer</p></td>
+					<td class="prop"><span class="inlineSpan">hidePlayer()</span>:void</td>
+					<td class="lastCol">Hide the player if the display type is set to sticky.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">showPlayer</p></td>
+					<td class="prop"><span class="inlineSpan">showPlayer()</span>:void</td>
+					<td class="lastCol">Show the player if the display type is set to sticky.</td>
+				  </tr>
+				</table>
+				
+				<p CLASS="largeLabel1">API - event listeners:</p>
+				<table>
+				  <tr class="firstTr">
+					<th class="fistTd">Event</td>
+					<th class="secondTd">Prefix</td>
+					<th class="thirdTd">Description</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">error</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.ERROR</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance can't load or play the video file, this event has a property of type string that represents the error message.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">goFullScreen</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.GO_FULLSCREEN</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player is set to fullscreen.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">goNormalScreen</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.GO_NORMALSCREEN</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player is set to normalscreen.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">ready</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.READY</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance API is actually available.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">stop</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.STOP</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance is stopped.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">play</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.PLAY</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance playback start to play.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">pause</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.PAUSE</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance playback is paused.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">update</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.UPDATE</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance is playing and it's position is changing (useful to update a custom scrub bar), this event has a property of type number between 0 (video start position) and 1 (video end position).</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">updateTime</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.UPDATE_TIME</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance current duration is changing. This event has two properties of type string curTime and totalTime.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">updateVideoSource</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.UPDATE_VIDEO_SOURCE</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance current video source is modified.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">updatePosterSource</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.UPDATE_POSTER_SOURCE</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance current poster source is modified.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">startToLoadPlaylist</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.START_TO_LOAD_PLAYLIST</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player playlist is starting to load.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playListLoadComplete</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.LOAD_PLAYLIST_COMPLETE</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player playlist is loaded.</td>
+				  </tr>
+				  <tr>
+					<td><p class="mainProp">playComplete</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.PLAY_COMPLETE</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance playback has reached the end of the video file.</td>
+				  </tr>
+				   <tr>
+					<td><p class="mainProp">safeToScrub</p></td>
+					<td><p class="inlineSpan">FWDUVPlayer.SAFE_TO_SCRUB</p></td>
+					<td class="lastCol">Dispatched when the Ultimate Video Player instance can be scrubbed.</td>
+				  </tr>
+				</table>
+				
+		<h3 id="annotations"><strong>J) Setup annotations.</strong> - <a href="#toc">top</a></h3>
+		<p>First of all to add annotations to a video an ul element with the structure presented below has to be added in the playlist li element that contains the video data in which you want the annotation(s). Inside it there are the annotations, you can add as many as you like by stacking them one after eachother. The li element that holds the annotation data has some attributes that consturct their logic:<br><br><span class="boldLi">data-start-time</span> - the start time when the annotaton show in hours:minutes:seconds format.<br><span class="boldLi">data-end-time</span> - the end time when the annotaton hide in hours:minutes:seconds format.<br><span class="boldLi">data-left</span> - the left postion in px.<br><span class="boldLi">data-top</span> - the top position in px.<br><span class="boldLi">data-normal-state-class</span> - a css class that represents the annotation normal state.<br><span class="boldLi">data-selected-state-class</span> - a css class that represents the annotation selected state, when the annotation is hovered this class will be applied, please note that this is optional if you don't want a selected state don't add this attribute<br><span class="boldLi">data-show-close-button</span> - this can be yes or no, shows or hides the annotation close button.<br><span class="boldLi">data-click-source</span> - this can contain a page URL or a javascript name ex:<span class="boldLi">data-click-source="myJavascritpFunction();"</span>, this attribute is optional if you don't want to open a page or to call a javascript function on click don't add this attribute.</span><br><span class="boldLi">data-click-source-target</span> - if you want to open a page this is this attribute holds the page target (_blank, _self).</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+		<ul data-annotations="">
+			<li data-start-time="00:00:01" data-end-time="00:00:29" data-left="40" data-top="45" data-show-close-button="yes" data-normal-state-class="UVPAnnotationNormal" data-selected-state-class="UVPAnnotationSelected">
+				<div>Inactive annotation!</div>
+			</li>
+			<li data-start-time="00:00:02" data-end-time="00:00:29" data-left="40" data-top="85" data-show-close-button="yes" data-click-source="http://www.webdesign-flash.ro" data-click-source-target="_blank" data-normal-state-class="UVPAnnotationLinkNormal" data-selected-state-class="UVPAnnotationLinkSelected">
+				<div><span style="font-weight:bold; text-decoration: underline;">LINK</span> support, href and target can be specified, also animation between annotation states is possible as you can see here on hover.</div>
+			</li>
+		</ul>
+		</pre>
+		<br><br>
+		
+		<br>
+		<h3 id="private"><strong>K) Setup private videos.</strong> - <a href="#toc">top</a></h3>
+		<p>To set a video private there is a paramter <span class="boldLi">data-is-private</span> that has to be set to "yes". The global password for all videos is set in the contructor <span class="boldLi">privateVideoPassword:"428c841430ea18a70f7b06525d4b748a"</span>. If you want to use a unique password for a video there is a parameter <span class="boldLi">data-private-video-password</span> that has to be set to a unique encrypted password. this is showed below.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+		<li data-thumb-source="content/thumbnails/small-msp.jpg" data-video-source="content/videos2/fwd-1080p.mp4" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-is-private="yes" data-private-video-password="428c841430ea18a70f7b06525d4b748a">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">PRIVATE VIDEO EXAMPLE</p>
+						<p class="fwduvp-thumbnail-title">Support for private videos.</p>
+					</div>	
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">MP3 STICKY PLAYER</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/p/msp/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		<p>To encrypt the video password there is a tool I have created that will encrypt the password <a href="http://www.webdesign-flash.ro/ps/" target="_blank">at this link</a>, enter your desired password in the input field then click on the <span class="boldLi">Encrypt password</span> button, after this the encrypted password can be copied and pasted when needed. The default password is Melinda.</p>
+		
+		<br>
+		<h3 id="encrypt"><strong>L) Encrypt video / subtitle path.</strong> - <a href="#toc">top</a></h3>
+		<p>To encrypt the video / subtitle path I have created a tool that will encrypt the video / subtitle path <a href="http://www.webdesign-flash.ro/vs/" target="_blank">at this link</a>, enter the video / subtitle path (this applies all video / subtitle / audio paths) in the input field then click on the <span class="boldLi">Encrypt media</span> button, once this is done copy the encrypted video / subtitle path and paste it as the video / subtitle source parameter.this is showed below</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+			<li data-thumb-source="content/thumbnails/small-360.jpg "data-video-source="[{source:'encrypt:Y29udGVudC92aWRlb3MyL2Z3ZC0xMDgwcC5tcDQ=', label:'hd1080'}]"  data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-downloadable="yes">
+				<div data-video-short-description="">
+					<div>
+						<p class="classicDarkThumbnailTitle">360 DEGREE VR VIDEO EXAMPLE</p>
+						<p class="fwduvp-thumbnail-title">Virtual reality 360 degree / VR support.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">360 DEGREE VR VIDEO EXAMPLE</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/p/360viewer/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		<br><br>
+		
+		<h3 id="google"><strong>M) Google Drive, Dropbox, Amazon S3.</strong> - <a href="#toc">top</a></h3>
+		<br><br>
+		<h3><strong>Google Drive</strong></h3>
+		<p class="boldLi">Method 1 - this is the recommend one please use it:</p>
+		<p>For this method I've created a <a href="https://www.youtube.com/watch?v=YK3YucN2PYc" target="_blank">video tutorial here</a> so plese watch it.</p>
+		<p>https://www.googleapis.com/drive/v3/files/[file_id]?alt=media&key=[api_key]&v=[.mp4][.mp3]</p>
+		<p>Example of working .mp4 file https://www.googleapis.com/drive/v3/files/0B4Au_agYmWFZNHNtZTlXUm1UUUE?alt=media&key=AIzaSyBsJ8HRNI4iHUqpszDtx3Ijq3ZKoXLUx-E&v=.mp4 and mp3 file https://www.googleapis.com/drive/v3/files/0B4Au_agYmWFZVG0zc2pzalVCVjg?alt=media&key=AIzaSyBsJ8HRNI4iHUqpszDtx3Ijq3ZKoXLUx-E&v=.mp3 .</p>
+		<br>
+		
+		<p class="boldLi">Method 2:</p>
+		<p>Go to Disc – My drive.<br><br>Right click on <span class=class="boldLi">get shareable link</span> the like on screenshot: <a href="assets/images/GDRightClick.jpg" target="blank">get video id 1</a> <a href="assets/images/GDRightClick2.jpg" target="blank">get video id 2</a> and use that video ID to create google drive video URL.<br><br>This is final URL how google drive video URL should look:https://drive.google.com/uc?export=download&id=videoID<br><br>Replace videoID with the id taken from the previous step and use it as the video source:https://drive.google.com/uc?export=download&id=0B4Au_agYmWFZQWdHdHN3OVJLX0E</p>
+
+
+		<br>
+		<p class="boldLi">Method 2 for larger google drive video files:</p>
+		<p>Go to Disc – My drive.<br><br>Right click on <span class=class="boldLi">get shareable link</span> the like on screenshot: <a href="assets/images/GDRightClick.jpg" target="blank">get video id 1</a> <a href="assets/images/GDRightClick2.jpg" target="blank">get video id 2</a><br><br>Copy that URL of the video directly into browser then search for the video src, please see <a href="assets/images/GDRightClick3.jpg" target="blank">get video src</a>.<br><br>Right click on video -> inspect element -> find div with class ‘drive-viewer-video-player’ -> open up iframe -> document -> html -> body -> player -> html5-video-player -> and you will see a &lt;video&gt; tags with the ‘src’ of the video, you need copy/paste that ‘src’ into the player options.<br><br>Use the mp4 or mp3 src as the the video source.</p>
+		<br>
+
+		<p class="boldLi">Method 3:</p>
+		<p>Go to Disc – My drive.<br><br>Right click on <span class=class="boldLi">get shareable link</span> the like on screenshot: <a href="assets/images/GDRightClick.jpg" target="blank">get video id 1</a> <a href="assets/images/GDRightClick2.jpg" target="blank">get video id 2</a> and use that video ID to create google drive video URL.<br><br>This is how the final URL should look: http://api.getlinkdrive.com/getlink?url=https://drive.google.com/file/d/GOOGLE_DRIVE_VIDEO_ID/view where GOOGLE_DRIVE_VIDEO_ID represents the video id taken for the shareable link<br><br>Once open the link will answer with a JSON, use the JSON value of the url paramaeter as the video source.</p>
+
+		<h3><strong>Dropbox</strong></h3>
+		<p>Copy the drop box video link, then replace www.dropbox.com with dl.dropboxusercontent.com.</p>
+		<p>Thus the URL: https://www.dropbox.com/s/abcd/file.mp4?dl=0 will become: https://dl.dropboxusercontent.com/s/acbd/file.mp4?dl=0 .</p>
+		
+		<br>
+		<p>For openload please watch <a href="https://www.youtube.com/watch?v=YA8-OeDModE&feature=youtu.be" target="_blank">this video tutorial</a>.</p>
+		
+		<br>
+		
+		<h3 id="start"><strong>N) Start / stop video at a specified time.</strong> - <a href="#toc">top</a></h3>
+		<p>To start a video at a specified time set the <span class="boldLi">data-start-at-time</span> attribute to a string in the form of <span class="boldLi">hours:minutes:seconds</span> for example to start playing the video at minute 1 and second 10 set <span class="boldLi">data-start-at-time:"00:01:10"</span>, the same applies to stopping a video at a speciied time only that the attribute name is called <span class="boldLi">data-stop-at-time</span>, this is showed below.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+			<li data-thumb-source="content/thumbnails/small-360.jpg "data-video-source="content/videos2/fwd-1080p.mp4"  data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-downloadable="yes" data-start-at-time="00:00:10" data-stop-at-time="00:00:40">
+				<div data-video-short-description="">
+					<div>
+						<p class="classicDarkThumbnailTitle">360 DEGREE VR VIDEO EXAMPLE</p>
+						<p class="fwduvp-thumbnail-title">Virtual reality 360 degree / VR support.</p>
+					</div>
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="fwduvp-video-title">360 DEGREE VR VIDEO EXAMPLE</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/p/360viewer/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		<br><br>
+		
+		<h3 id="popw"><strong>O) Advertisement on pause window.</strong> - <a href="#toc">top</a></h3>
+		<p>To show the advertisement window when the video is paused an attribute  <span class="boldLi">data-advertisement-on-pause-source</span> has to be added and the value of it has to be a page source. For example <span class="boldLi">data-advertisement-on-pause-source="http://www.webdesign-flash.ro/iframe.html"</span>, this is showed below </p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+			<li data-thumb-source="content/thumbnails/small-rap.jpg" data-video-source="content/videos2/fwd-1080p.mp4" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-advertisement-on-pause-source="http://www.webdesign-flash.ro/iframe.html">
+				<div data-video-short-description="">
+					<div>
+						<p class="fwduvp-thumbnail-title">ADVERTISEMENT WINDOW ON PAUSE EXAMPLE</p>
+						<p class="fwduvp-thumbnail-title">The source can be any webpage.</p>
+					</div>	
+				</div>
+				
+			</li>
+		</pre>
+		<br><br>
+		
+		<h3 id="vast"><strong>P) >VAST / VMAP / Google Doubleclick IMA (video adsense).</strong> - <a href="#toc">top</a></h3>
+		<p>Currently UVP support only VAST, VMAP and Google Doubleclick IMA (video adsense. In the download files in the content folder there is a folder called vast that contains VAST and VMAP files for reference.</p>
+		<p>To add a VAST or VMAP files for a video an attribute called <span class="boldLi">data-vast-url</span> has to be added and the value of it has to be a vast xml location / path, for example http://webdesign-flash.ro/p/uvp/content/vast.xml, this XML file has to follow the VAST template format, add the attribute <span class="boldLi">data-vast-clicktrough-target</span> that represents the target of the window that will be opened when the video ad is clicked (_self, _blank, _parent), add the attribute <span class="boldLi">data-vast-linear-astart-at-time</span> that represents the start time in hh:mm:ss format at which the video ad will start playing, to start it as pre-roll set this attribute to 00:00:00, mid-roll at any time that you like for example 00:10:20 and for post-roll set it to a second less then the total video duration so for example if the total video duration is 01:10:15 set it to 01:10:14. Please see the example below for reference also you can find a vast example in any of the html files from the start folder.</p>
+		<p>For Google Doubleclick IMA (video adsense) add the tag URL as the value of  <span class="boldLi">data-vast-url</span>  attribute.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+			<li data-thumb-source="content/thumbnails/small-s3dcov.jpg" data-video-source="content/videos2/fwd-1080p.mp4" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-downloadable="no" data-vast-url="content/vast-pod.xml" data-vast-clicktrough-target="_blank" data-vast-linear-astart-at-time="00:00:00">
+				<div data-video-short-description="">
+					<div>
+						<p class="classicDarkThumbnailTitle">VAST XML EXAMPLE</p>
+						<p class="fwduvp-thumbnail-title">Support for VAST <span style='color:#FFFFFF'> "Video Ad Serving Template"</span> pre-roll, mid-roll, post roll with unique functionality.</p>
+					</div>	
+				</div>
+				<div data-video-long-description="">
+					<div>
+						<p class="classicDarkThumbnailTitle">VAST XML EXAMPLE</p>
+						<p class="fwduvp-video-main-description">Each video can contain a detailed description, the description can be formatted with CSS as you like. The description window and description button can be disabled individually for each video or globally for all videos.</p>
+						<p class="fwduvp-link">For more information about this please follow <a href="http://www.webdesign-flash.ro/p/s3dcov/" target="_blank">this link</a></p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		<br><br>
+		
+		<h3 id="analytics"><strong>Q) Setup google analytics</strong> - <a href="#toc">top</a></h3>
+		<p>I've decided a video tutorial will be better to explain this feature so please watch <a href="https://youtu.be/fJgKPYOGX-g" target="_blank">this video tutorial</a></p>
+		
+		<h3 id="redirect"><strong>R) Redirect / open page when the video has finished to play</strong> - <a href="#toc">top</a></h3>
+		<p>UVP allows to open a new page or to replace the current page with a new one by setting the attribute<span class="boldLi">data-redirect-url</span> to point to the page that you want to open. Please see below example.</p>
+		<p>If you don't want this feature leave <span class="boldLi">data-redirect-url</span> attribute blank or remove it entirely.</p>
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+			<li data-thumb-source="content/thumbnails/small-r3dcov.jpg" data-video-source="[{source:'content/videos2/fwd-480p.mp4', label:''}]" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-downloadable="yes" data-redirect-url="http://www.webdesign-flash.ro" data-redirect-target="_self">
+				<div data-video-short-description="">
+					<div>
+						<p class="classicDarkThumbnailTitle">ROYAL 3D COVERFLOW</p>
+						<p class="fwduvp-thumbnail-title">Fully responsive 3D Coverflow that allows to display media or HTML content with an unique layout.</p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		
+		<br>
+		<h3 id="timestamps"><strong>S) Starting / stopping the video at a specified time using timestamps</strong> - <a href="#toc">top</a></h3>
+		<p>It is possible to start and / or stop a video at a specified time adding a timestamp as part of the player URL, the format should be <span class="bold">t=hours[h]minutes[m]seconds[s]</span> the hours, minutes and seconds should be higher the 59, some examples as follows <span class="bold">t=0h2m30s</span> for start and / or <span class="bold">e=0h2m30s</span>  for stop, e.g. <span class="bold">t=0h30m2s, <span class="bold">e=20m40s</span></span>.
+		<p>This string is part of the URL for example <span class="bold">http://www.videoplayer-domain.com/#t=0h30m2s&e=0h30m10s</span> or if deeplinking is used <span class="bold">http://www.videoplayer-domain.com#/?playlistId=0&videoId=0&t=0h30m2s&e=0h30m10s</span>.</p>
+		
+		<br>
+        <h3 id="atob"><strong>T) A to B loop</strong> - <a href="#toc">top</a></h3>
+		<p>The a to b loop feature is basically a plugin for UVP this way it will not add to the total file size if it is not used. To enable it set in the constructor <span class="boldLi">useAToB:"yes"</span> this will make sure that the plugin js file will be loaded, the js file can be found in the content->java->FWDUVPATB.js. To activate this feature for a video add this attribute <span class="boldLi">data-use-a-to-b="yes"</span> when adding a video. Example below.</p>
+		
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+			<li data-thumb-source="content/thumbnails/small-r3dcov.jpg" data-video-source="[{source:'content/videos2/fwd-480p.mp4', label:''}]" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-use-a-to-b="yes">
+				<div data-video-short-description="">
+					<div>
+						<p class="classicDarkThumbnailTitle">ROYAL 3D COVERFLOW</p>
+						<p class="fwduvp-thumbnail-title">Fully responsive 3D Coverflow that allows to display media or HTML content with an unique layout.</p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		
+		<br>
+        <h3 id="thumbnails_preview"><strong>U) Thumbnails preview</strong> - <a href="#toc">top</a></h3>
+		<p>The thumbnails preview feature is basically a plugin for UVP this way it will not add to the total file size if it is not used. The js file can be found in the content->java->FWDUVPThumbnailsPreview.js. To activate this feature for a video add this attribute <span class="boldLi">data-thumbnails-preview="your-file.vtt"</span> when adding a video, the .vtt file contains the entries for the thumbnails images, it is self explanatory just open and edit it in a text editor. For a good performance I recommend to save the thumbnail images to the same width and height as the constructor settings for the thumbnails previews. Example below.</p>
+
+		<p>To enable the live auto-generated thumbnails preview set <span class="boldLi">data-thumbnails-preview="auto"</span>, <a href="https://www.youtube.com/watch?v=XNhpC0dndAg" target="_blank">video tutorial here</a>. Please note his feature works with self hosted or external hosted mp4/video, HLS/m3u8, Google drive, Dropbox, Amazon S3 and more....</p>
+		
+		<pre class="brush: js; html-script: true, class-name: 'negativeLeftMarginsHTML'">
+			<li data-thumb-source="content/thumbnails/small-r3dcov.jpg" data-video-source="[{source:'content/videos2/fwd-480p.mp4', label:''}]" data-poster-source="content/posters/mp4-poster.jpg,content/posters/mp4-poster-mobile.jpg" data-thumbnails-preview="content/thumbnails.vtt">
+				<div data-video-short-description="">
+					<div>
+						<p class="classicDarkThumbnailTitle">ROYAL 3D COVERFLOW</p>
+						<p class="fwduvp-thumbnail-title">Fully responsive 3D Coverflow that allows to display media or HTML content with an unique layout.</p>
+					</div>
+				</div>
+			</li>
+		</pre>
+		
+		<br>
+		<h3 id="chromecast"><strong>V) Chromecast</strong> - <a href="#toc">top</a></h3>
+		<p>UVP has support for using chromecast, this will enable to play video or audio on a big TV screen and to control the media using the video player interface from the web page.</p>
+
+		<p>You will need a TV that supports chromecast or a chromecast dongle <a href="https://www.amazon.co.uk/ASENTER-Wireless-Streaming-Chromecast-Miracast/dp/B07QW67231/ref=sr_1_1_sspa?keywords=chromecast&qid=1559293793&s=computers&sr=1-1-spons&psc=1" target="_blank">like this one</a>.</p>
+		<p>To enable this feature set in the player constructor showChromecastButton:"yes" if you don't need it just set it to showChromecastButton:"no".</p>
+		<p>There are some limitations, this feature will only work on google chrome and has support for mp4 and mp3 media files (HLS, Youtube, Vimeo and advertisement are not supported) also your webpage will have to run on a https protocol.</p>
+		<p>If the media content is not mp3 or mp4 and the chromecast is connected, the connection to the TV is stopped and the chroemcast button is removed from the player control bar.</p>
+		
+		<p>If you want to use subtitles you will have to use .vtt files. .txt or .srt are not supported.</p>
+		<p>For all videos, subtitles and posters CORS has to be enabled, you can read about CORS <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">here</a>, to enable CORS is done by adding a .htaccess file in the folder that contains the videos, posters and subtitles, you can find this file in the start/content/subtitles folder. If you are using external files then those files have to be CORS enabled otherwise they will not work. This is a requirement of chromecast so there is no hack around this so this rules has to be followed.</p>
+
+		<p><a href="https://www.youtube.com/watch?v=Nyfa2PDAbtQ" target="_blank">HLS/.m3u8/HTTP Live Streaming Chromecast video tutorial</a>.</p>
+
+		<br>
+        <h3 id="hex"><strong>W) Hex colors</strong> - <a href="#toc">top</a></h3>
+        <p>If you want to change the colors of the video player buttons select from the start folder the <strong>responsive-minimal-skin-dark.html</strong> or <strong>responsive-minimal-skin-white.html</strong> files as reference, open them in a text editor. There is an option called <strong>useHEXColorsForSkin</strong> set it to <strong>yes</strong> and to change the buttons color set <strong>normalHEXButtonsColor</strong> to any hexadecimal value that you want for example red <strong style="color:#FF0000;">#FF0000</strong>.</p>
+        <p>Plase note that this feature will not work local so make sure you are testing online.</p>
+		
+		<br>
+        <h3 id="finger"><strong>X) Fingerprint stamp</strong> - <a href="#toc">top</a></h3>
+        <p>There is a HTML file in the start folder called fingerprint-stamp.html as reference and please watch this <a href="https://www.youtube.com/watch?v=5ccWSz1Mr_0" target="_blank">video tutorial</a> to see how it works.</p>
+		
+		<br>
+        <h3 id="credits"><strong>Y) Sources and Credits</strong> - <a href="#toc">top</a></h3>
+        <p>This component was made by Tibi from FWD (FWDesign) <a href="http://www.webdesign-flash.ro">FUTURE WEB DESIGN</a>, for more information and support contact us at <a href="mailto:youremail@yourdomain.com">tibi_diablo@yahoo.com</a></p>
+		<p>Once again, thank you so much for purchasing this item. As I said at the beginning, I'd be glad to help you if you have any questions regarding this Ultimate Video Player and I'll do my best to assist.</p> 
+		
+		<p class="append-bottom alt large"><strong>FWDesign</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>
+
+</script>

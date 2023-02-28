@@ -1,0 +1,120 @@
+/* fwd custom css */
+img{margin-top: 10px; margin-bottom:10px;}
+
+.boldLi{
+	font-family:Arial, Geneva, sans-serif;
+	font-weight:bold;
+	font-size:12px;	
+}
+
+.red{
+	color:#FF0000;
+}
+
+.bold{
+	font-weight:bold;
+}
+
+.imageT{
+	margin-top:-10px;
+}
+
+.redBold{
+	color:#FF0000;
+	font-family:Arial, Geneva, sans-serif;
+	font-weight:bold;
+	font-size:12px;	
+}
+
+.largeLabel1{
+	font-size:20px;
+	text-align:center;
+}
+
+/* Api table */
+table{
+	border-collapse:collapse;
+	text-align:left;
+	width:100%;
+}
+
+tr{
+	 border-top:1px solid #BBBBBB;
+	 text-align:left;
+}
+
+th{
+	padding-top:10px; 
+	padding-bottom:10px; 
+	padding-left:5px; 
+	padding-right:5px;
+	text-align:left;
+	color:#000000;
+}
+
+td{
+	text-align:left;
+	padding-top:10px; 
+	padding-bottom:10px; 
+    padding-left:5px; 
+	padding-right:5px;
+}
+
+.firstTr{
+	border-top:0px;
+}
+
+.firstTd{
+	width:20%;	
+}
+
+.secondTd{
+	width:30%;
+}
+
+.thirdTd{
+	width:50%;
+}
+
+.mainProp{
+	background-color:#999999;
+	color:#FFFFFF;	
+	display:inline;
+	padding-left:2px;
+	padding:2px;
+	padding-left:4px;
+	padding-right:4px;
+	border-radius:3px;
+}
+
+.prop{
+	color:#999999;
+}
+
+.inlineSpan{
+	color:#000000;
+}
+
+.lastCol{
+	margin-bottom:20px;	
+}
+
+.negativeLeftMargins{
+	margin-left:-34px !important;
+}
+
+.negativeLeftMarginsHTML3{
+margin-left:-34px !important;
+}
+
+.negativeLeftMarginsHTML4{
+margin-left:-40px !important;
+}
+
+.negativeLeftMarginsHTML{
+margin-left:-28px !important;
+}
+
+.negativeLeftMarginsHTML5{
+margin-left:-20px !important;
+}
